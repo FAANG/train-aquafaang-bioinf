@@ -1,0 +1,25 @@
+#
+# Config file for ATACseq workflow
+#
+
+# Software used
+
+ATAQV_CMD: "singularity exec /cvmfs/singularity.galaxyproject.org/all/ataqv:1.0.0--py36h54a5c19_1 ataqv"
+ATAQV_MKARV_CMD: "singularity exec /cvmfs/singularity.galaxyproject.org/all/ataqv:1.0.0--py36h54a5c19_1 mkarv"
+GENRICH_CMD: "singularity exec /cvmfs/singularity.galaxyproject.org/all/genrich:0.6--hed695b0_0 Genrich"
+bedGraphToBigWig_CMD: "singularity exec /cvmfs/singularity.galaxyproject.org/all/ucsc-bedgraphtobigwig:377--h446ed27_1 bedGraphToBigWig"
+SAMTOOLS_CMD: "samtools"
+
+
+outdir: "results"
+
+
+### Sample table (paths to bam files and sample metadata):
+sampleTbl: "config/samples.tsv" 
+
+### Files needed for ataqv
+ATAQV_tssfile: "ref_genome/SsalTSS_NCBI.bed" # table of TSS loci
+ATAQV_chrmList: "ref_genome/Ssal_chrm.txt" # list of autosomal chromosomes
+
+### needed for bedGraphToBigWig:
+chrmSizes_file: "ref_genome/Ssal_chrm.txt/Ssal_chrm_sizes.txt"

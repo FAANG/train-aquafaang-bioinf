@@ -1,0 +1,99 @@
+import pandas as pd
+
+sampleTbl = pd.read_csv(config["sampleTbl"],sep="\t",dtype = str)
+# sample table should have the columns: bamPath, tissue, rep
+
+outdir = config["outdir"]
+
+
+sampleIDs = list(sampleTbl.tissue + "-" + sampleTbl.rep)
+
+# Figure out what are the final output files:
+
+outGenrich = expand(outdir + "/Genrich/{sampleID}.narrowPeak", sampleID = sampleIDs)
+outGenrich = outGenrich + expand(outdir + "/Genrich/{sampleID}.bw", sampleID = sampleIDs)
+
+outIndexedBam = expand("data/{sampleID}.bam.bai",sampleID = sampleIDs)
+
+outAtaqv = expand(outdir + "/ataqv/{sampleID}.ataqv.json", sampleID = sampleIDs)
+outAtaqv = outAtaqv + [outdir + "/ataqv_html"]
+
+rule all:
+  input: outGenrich + outIndexedBam  + outAtaqv
+  
+
+# Get the software from config:
+ATAQV_CMD = config["ATAQV_CMD"]
+ATAQV_MKARV_CMD = config["ATAQV_MKARV_CMD"]
+GENRICH_CMD = config["GENRICH_CMD"]
+bedGraphToBigWig_CMD = config["bedGraphToBigWig_CMD"]
+SAMTOOLS_CMD = config["SAMTOOLS_CMD"]
+
+
+##########################################
+####   GENRICH part of the workflow   ####
+##########################################
+
+
+
+rule sortByRead_Genrich:
+  input: "data/{sampleID}.bam"
+  output: temp(outdir + "/Genrich/{sampleID}.sortedByRead.bam")
+  threads: 4
+  shell: "{SAMTOOLS_CMD} sort -n -o {output} -@ {threads} {input}"
+
+
+rule Genrich:
+  input: outdir + "/Genrich/{sampleID}.sortedByRead.bam"
+  output: 
+    narrowPeak = outdir + "/Genrich/{sampleID}.narrowPeak",
+    bedGraph = temp(outdir + "/Genrich/{sampleID}.k.bedGraph")
+  resources: mem_mb = 11000
+  log: outdir + "/Genrich/logs/{sampleID}.log"
+  shell: "{GENRICH_CMD} -t {input} -o {output.narrowPeak} -k {output.bedGraph} -j -q 0.05 -v 2> {log}"
+
+rule fix_bedGraph_Genrich:
+  input: outdir + "/Genrich/{sampleID}.k.bedGraph"
+  output: temp(outdir + "/Genrich/{sampleID}.k.fixed.bedGraph")
+  shell: "grep ^ssa {input} | cut -f 1-4 > {output}"
+
+rule bedGraph2bw_Genrich:
+  input: outdir + "/Genrich/{sampleID}.k.fixed.bedGraph"
+  output: outdir + "/Genrich/{sampleID}.bw"
+  params: chrmSizes = config["chrmSizes_file"]
+  shell: "{bedGraphToBigWig_CMD} {input} {params.chrmSizes} {output}"
+  
+
+##########################################
+####    ataqv part of the workflow    ####
+##########################################
+
+# index..
+rule indexBam_ataqv:
+  input: "data/{sampleID}.bam"
+  output: "data/{sampleID}.bam.bai"
+  shell: "{SAMTOOLS_CMD} index {input}"
+  
+
+rule ataqv:
+  input: 
+    bam = "data/{sampleID}.bam",
+    bai = "data/{sampleID}.bam.bai",
+    peak = outdir + "/Genrich/{sampleID}.narrowPeak"
+  output: outdir + "/ataqv/{sampleID}.ataqv.json"
+  params:
+    tssfile=config["ATAQV_tssfile"],
+    chrmList=config["ATAQV_chrmList"],
+  shell: 
+    """
+    {ATAQV_CMD} Ssal {input.bam} \
+      --metrics-file {output} \
+      --peak-file {input.peak} \
+      --tss-file {params.tssfile} \
+      --autosomal-reference-file {params.chrmList} 
+    """
+
+rule ataqv_generate_html:
+  input: lambda w: expand(outdir + "/ataqv/{sampleID}.ataqv.json", sampleID=sampleIDs)
+  output: directory( outdir + "/ataqv_html" )
+  shell: "{ATAQV_MKARV_CMD} {output} {input}"

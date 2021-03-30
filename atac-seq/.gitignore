@@ -1,0 +1,10 @@
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+.snakemake/
+data/*.bam
+data/*.bai
+results/
+*_cache/
+*_files/

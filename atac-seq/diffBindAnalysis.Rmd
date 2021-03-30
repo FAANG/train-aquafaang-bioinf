@@ -1,0 +1,114 @@
+---
+title: "Using DiffBind to analyse ATAC-seq data"
+output:
+  html_document: 
+    toc: yes
+    toc_float: yes
+    code_folding: hide
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(DiffBind)
+library(tidyverse)
+```
+
+## DiffBind
+
+The [DiffBind bioconductor package](https://bioconductor.org/packages/release/bioc/html/DiffBind.html) "Computes differentially bound sites from multiple ChIP-seq experiments using affinity (quantitative) data. Also enables occupancy (overlap) analysis and plotting functions."
+
+Input is a set of BAM files with associated peak files together with some metadata, all of which is described in a table (SampleSheet).
+
+```{r generateSampleSheet}
+
+
+sampleTbl <- read_tsv("config/samples.tsv")
+
+sampleSheet <- 
+  sampleTbl %>% 
+  mutate(SampleID = paste(tissue,rep,sep = "-")) %>% 
+  mutate(Peaks = paste0("results/Genrich/",SampleID,".narrowPeak")) %>% 
+  dplyr::rename( bamReads = bamPath, Tissue = tissue, Replicate=rep) %>% 
+  mutate(
+    # Condition = "Fresh",
+    #      Factor = "ATAC-seq",
+         PeakCaller = "narrow",
+         ScoreCol = 5,
+         LowerBetter = FALSE)
+```
+
+```{r message=FALSE, warning=FALSE, paged.print=TRUE, cache=TRUE}
+dbaObject <- dba(sampleSheet=sampleSheet)
+
+dbaObject
+```
+
+Plot peak correlation:
+
+```{r}
+plot(dbaObject)
+```
+
+Count reads per peak. 
+
+```{r, cache=TRUE}
+# note: this can take some time..
+system.time(
+  dbaObject <- dba.count(dbaObject)
+)
+```
+
+Plot read count correlation
+
+```{r}
+plot(dbaObject)
+```
+
+Plot PCA
+
+```{r}
+dba.plotPCA(dbaObject)
+```
+
+```{r}
+readsMat <- sapply(dbaObject$peaks, "[[","Reads")
+colnames(readsMat) <- with(dbaObject$samples, paste(SampleID, Replicate,sep = "_"))
+barplot(colSums(readsMat))
+
+dir.create("results/diffBind")
+
+# save the peaks
+dbaObject$peaks[[1]][,1:3] %>% write_tsv("results/diffBind/commonPeaks.bed",col_names = F)
+
+# save the readCounts
+```
+
+### Differential binding
+
+```{r analyze, cache=TRUE}
+# use Condition to define contrast
+dbaObject <- dba.contrast(dbaObject, categories=DBA_TISSUE)
+
+system.time(
+  dbaObject <- dba.analyze(dbaObject)
+)
+```
+
+Save the results as a bed file that can be viewed in a genome browser:
+
+```{r}
+# get dataframe with results
+x <- dba.report(dbaObject,th=1, DataType = DBA_DATA_FRAME)
+
+# save a track with the results
+x %>% as_tibble() %>% 
+  arrange(Chr,Start) %>% 
+  mutate( res = ifelse(FDR < 0.05, ifelse(Fold>0,"B","L"), "-")) %>% 
+  select( Chr, Start, End, res) %>% 
+  write_tsv("results/diffBind/diffBind.bed",col_names = F)
+  
+
+```
