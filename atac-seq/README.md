@@ -8,10 +8,10 @@ Rough overview:
 
 * Peak calling with Genrich
   + convert to BigWig
-* Quality control with ATAQV
-* Peak annotation - Connect peaks to genes with ChIPseeker
-* DiffBind to find differential open chromatin
-* Visualise with IGV (ATAC-seq pile-ups, peaks and DiffBind results)
+* Quality control with [ATAQV](https://github.com/ParkerLab/ataqv/)
+* Peak annotation - Connect peaks to genes with [ChIPseeker](https://bioconductor.org/packages/release/bioc/html/ChIPseeker.html)
+* [DiffBind](https://bioconductor.org/packages/release/bioc/html/DiffBind.html) to find differential open chromatin
+* Visualise with [IGV](https://software.broadinstitute.org/software/igv/) (ATAC-seq pile-ups, peaks and DiffBind results)
 
 ## TODO:
 
