@@ -43,5 +43,5 @@ TSSbed <- data.frame(seqnames=seqnames(TSS),
   # convert seqnames to ssaXX 
   mutate( seqnames = sprintf("ssa%02i", 1 + as.integer(sub("NC_0273(..).1","\\1",seqnames)) ) )
 
-write.table(TSSbed,file = "SsalTSS_NCBI.bed",sep="\t",col.names = F,row.names = F,quote = F, append = F)
+write.table(TSSbed,file = "ref_genome/SsalTSS_NCBI.bed",sep="\t",col.names = F,row.names = F,quote = F, append = F)
 
