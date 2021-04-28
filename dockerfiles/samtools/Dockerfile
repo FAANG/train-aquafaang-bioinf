@@ -19,5 +19,9 @@ RUN apt-get -qqy update --fix-missing && \
     apt-get -qqy install --no-install-recommends \
     libcurl4
 WORKDIR /mnt
+
+COPY run_tests.sh /usr/local/bin/
+RUN  chmod 755 /usr/local/bin/run_tests.sh
+
 ENTRYPOINT ["samtools"]
 CMD []
