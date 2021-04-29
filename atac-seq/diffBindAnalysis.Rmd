@@ -30,7 +30,7 @@ sampleTbl <- read_tsv("config/samples.tsv")
 sampleSheet <- 
   sampleTbl %>% 
   mutate(SampleID = paste(tissue,rep,sep = "-")) %>% 
-  mutate(Peaks = paste0("results/Genrich/",SampleID,".narrowPeak")) %>% 
+  mutate(Peaks = paste0("results/genrich/",SampleID,".narrowPeak")) %>% 
   dplyr::rename( bamReads = bamPath, Tissue = tissue, Replicate=rep) %>% 
   mutate(
     # Condition = "Fresh",
