@@ -1,16 +1,13 @@
 # ATAC-seq tutorial (Under development)
 
-> This is an ATAC-seq tutorial currently under development for the EBI aqua-faang course.
+> This  ATAC-seq tutorial currently under development.
 
-Read mapping and peak calling covered on day 1 with chip data. Since read mapping is the same for both we can start the ATAC-seq session with already mapped reads (.bam files).
+We will start the ATAC-seq session with already mapped reads (.bam files).
 
 Rough overview:
 
-* Peak calling with Genrich
-  + convert to BigWig
+* Peak calling with Genrich + convert to BigWig
 * Quality control with [ATAQV](https://github.com/ParkerLab/ataqv/)
-* Peak annotation - Connect peaks to genes with [ChIPseeker](https://bioconductor.org/packages/release/bioc/html/ChIPseeker.html)
-* [DiffBind](https://bioconductor.org/packages/release/bioc/html/DiffBind.html) to find differential open chromatin
 * Visualise with [IGV](https://software.broadinstitute.org/software/igv/) (ATAC-seq pile-ups, peaks and DiffBind results)
 
 ## TODO:
@@ -40,7 +37,7 @@ Rough overview:
 
 ### Input Data
 
-The input data are bam files for 8 ATAC-seq samples mapped to the Atlantic salmon genome. There are four samples from brain (B) and four from liver (L). (These files can be downloaded from http://arken.nmbu.no/~lagr/atac-seq-training/data and placed in the "data" folder.)
+The input data are bam files for 8 ATAC-seq samples mapped to the Atlantic salmon genome. There are four samples from brain (B), four from liver (L) and four from spleen (SP). These files can be downloaded from http://arken.nmbu.no/~lagr/atac-seq-training/data and placed in the "data" folder.
 
 The bam files are are sorted by mapping position. Duplicates/multimapped reads and reads mapping to mitochondrial chromosome or unplaced scaffolds have been removed.
 
