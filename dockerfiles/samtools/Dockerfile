@@ -13,6 +13,8 @@ WORKDIR /samtools
 RUN make && make test && make install
 
 FROM ubuntu:20.04
+LABEL org.opencontainers.image.source https://github.com/FAANG/train-aquafaang-bioinf
+
 COPY --from=builder /samtools/samtools /usr/local/bin/
 RUN apt-get -qqy update --fix-missing && \
     apt-get -qqy full-upgrade && \
