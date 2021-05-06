@@ -5,7 +5,6 @@ on:
     # Publish `master` as Docker `latest` image.
     branches:
       - main
-      - du/publish_images
     paths:
       - '.github/workflows/docker-publish-genrich.yml'
       - 'dockerfiles/genrich/**'
