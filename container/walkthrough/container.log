@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.4.20)  6 MAY 2021 11:45
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.4.20)  6 MAY 2021 18:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -785,22 +785,6 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 179--180
 [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (33.76851pt too wide) in paragraph at lines 186--187
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (218.34138pt too wide) in paragraph at lines 187--188
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][] 
- []
-
-
-Overfull \hbox (33.76851pt too wide) in paragraph at lines 188--189
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
 Overfull \hbox (0.17213pt too wide) in paragraph at lines 196--199
 \T1/ptm/m/n/12 BioContainers is a community-driven project that pro-vides the i
 n-fras-truc-ture and ba-sic guide-
@@ -894,23 +878,13 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 374--375
  []
 
 
-Overfull \hbox (106.27928pt too wide) in paragraph at lines 381--382
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 399--400
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 398--399
 [][][] 
- []
-
-
-Overfull \hbox (33.76851pt too wide) in paragraph at lines 408--409
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 412.
+Package pdftex.def Info: ./images//logo.png  used on input line 411.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -921,51 +895,29 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [6]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 423--424
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 422--423
 [][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 452--452
+Underfull \hbox (badness 10000) in paragraph at lines 451--451
 []\T1/ptm/m/n/12 To make the mount-ing short, cre-ate a en-vi-ron-ment vari-abl
 e: \T1/ptm/m/it/12 ex-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 452--452
+Underfull \hbox (badness 10000) in paragraph at lines 451--451
 \T1/ptm/m/it/12 port docker_mount="type=bind,source=$HOME/train-aquafaang-
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 452--453
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 451--452
 [][][] 
- []
-
-
-Overfull \hbox (178.79005pt too wide) in paragraph at lines 458--459
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (416.09804pt too wide) in paragraph at lines 459--460
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][][][][][][][] 
- []
-
-
-Overfull \hbox (310.62782pt too wide) in paragraph at lines 460--461
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][
-][][][][][][][][][] 
- []
-
-
-Overfull \hbox (132.64684pt too wide) in paragraph at lines 461--462
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 467.
+Package pdftex.def Info: ./images//logo.png  used on input line 453.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -978,21 +930,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 [7]
 
 Package hyperref Warning: Difference (2) between bookmark levels is greater 
-(hyperref)                than one, level fixed on input line 470.
+(hyperref)                than one, level fixed on input line 480.
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 484--485
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 494--495
 [][][] 
- []
-
-
-Overfull \hbox (126.05495pt too wide) in paragraph at lines 495--496
-[][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 504.
+Package pdftex.def Info: ./images//logo.png  used on input line 496.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1003,13 +950,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [8]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 513--514
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 523--524
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 527.
+Package pdftex.def Info: ./images//logo.png  used on input line 537.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1024,13 +971,13 @@ Package rerunfilecheck Info: File `container.out' has not changed.
 (rerunfilecheck)             Checksum: 3FBAECFB4150540AA76A8A2DCB0A7D73;1942.
  ) 
 Here is how much of TeX's memory you used:
- 22854 strings out of 478994
- 405230 string characters out of 5858184
- 707027 words of memory out of 5000000
- 39743 multiletter control sequences out of 15000+600000
+ 22863 strings out of 478994
+ 405377 string characters out of 5858184
+ 802027 words of memory out of 5000000
+ 39742 multiletter control sequences out of 15000+600000
  433752 words of font info for 65 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,16n,88p,390b,1376s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,16n,88p,390b,1388s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
 exlive/2021/texmf-dist/fonts/type1/public/bera/fvmb8a.pfb></usr/local/texlive/2
 021/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2021/texm
@@ -1039,10 +986,10 @@ fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/t
 ype1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/t
 imes/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/utmri
 8a.pfb>
-Output written on container.pdf (9 pages, 216717 bytes).
+Output written on container.pdf (9 pages, 217710 bytes).
 PDF statistics:
- 344 PDF objects out of 1000 (max. 8388607)
- 320 compressed objects within 4 object streams
- 186 named destinations out of 1000 (max. 500000)
+ 356 PDF objects out of 1000 (max. 8388607)
+ 332 compressed objects within 4 object streams
+ 196 named destinations out of 1000 (max. 500000)
  130 words of extra memory for PDF output out of 10000 (max. 10000000)
 

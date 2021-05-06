@@ -51,7 +51,7 @@ anchorcolor = blue]{hyperref}
 \lstset{
 	basicstyle=\small\ttfamily,
 	columns=flexible,
-	breaklines=false,
+	breaklines=true,
 	breakatwhitespace=false,
 	backgroundcolor=\color{blue!20},
 	showstringspaces=false,
@@ -377,8 +377,7 @@ anchorcolor = blue]{hyperref}
 		
 					\begin{minipage}{\linewidth}
 						\begin{lstlisting}
-						docker run -it \
-						--mount type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt  \
+						docker run -it 	--mount type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt  \
 						$blast_c bash
 					\end{lstlisting}
 				\end{minipage}
@@ -455,11 +454,22 @@ anchorcolor = blue]{hyperref}
 	
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						export docker_mount="type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt"
-						docker run --mount $docker_mount $blast\_c blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa -out /mnt/result-1.txt
-						docker exec <container_id> blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa -out /mnt/result-2.txt
-						blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa -out /mnt/result-3.txt
-						exit
+						export docker_mount= \
+						"type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt"
+						# 1
+						docker run \
+						--mount $docker_mount \
+						$blast\_c blastp \
+						-query /mnt/P04156.fasta \
+						-db /mnt/zebrafish.1.protein.faa \
+						-out /mnt/result-1.txt
+						# 2
+						docker exec <container_id> \
+						blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa \
+						-out /mnt/result-2.txt
+						# 3
+						blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa \
+						-out /mnt/result-3.txt
 					\end{lstlisting}
 				\end{minipage}
 				
@@ -491,8 +501,8 @@ anchorcolor = blue]{hyperref}
 						docker run -i alpine
 						# New terminal
 						docker container ls
-						#copy \textit{<container ID>}
-						docker stop \textit{<container ID>} # Alternative: docker kill \textit{<container ID>}
+						#copy <container ID>
+						docker stop <container ID> # Alternative: docker kill <container ID>
 					\end{lstlisting}
 				\end{minipage}
 
