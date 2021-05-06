@@ -52,7 +52,7 @@ anchorcolor = blue]{hyperref}
 	basicstyle=\small\ttfamily,
 	columns=flexible,
 	breaklines=true,
-	breakatwhitespace=false,
+	breakatwhitespace=true,
 	backgroundcolor=\color{blue!20},
 	showstringspaces=false,
 	frameround=ffff,
@@ -161,7 +161,7 @@ anchorcolor = blue]{hyperref}
 							\hline
 							samtools & \href{https://hub.docker.com/repository/docker/juettemann/samtools}{juettemann/samtools:latest} & \url{http://www.htslib.org/doc/sam.html} \\
 							\hline
-							Genrich & \href{https://hub.docker.com/repository/docker/juettemann/genrich}{juettemann/genrich:1.0} & \url{https://github.com/jsh58/Genrich}\\
+							Genrich & \href{https://hub.docker.com/repository/docker/juettemann/genrich}{juettemann/genrich:0.6} & \url{https://github.com/jsh58/Genrich}\\
 							\hline
 							bedgraphtobigwig & \href{https://quay.io/repository/biocontainers/ucsc-bedgraphtobigwig}{quay.io/biocontainers/ucsc-bedgraphtobigwig:377–h0b8a92\_2}- & \url{https://genome.ucsc.edu/goldenPath/help/bigWig.html#Ex3}\\
 							\hline
@@ -216,7 +216,7 @@ anchorcolor = blue]{hyperref}
 
 	\section{Reference Genome}
 		Like other *-seq experiments, also ATAC-seq relies on a reference genome
-		We will be using the International Cooperation to Sequence the Atlantic Salmon Genome  version 2 (ICSASG\_v2) genome from 2015 for this course. 
+		We will be using the \textit{ International Cooperation to Sequence the Atlantic Salmon Genome  version 2 (ICSASG\_v2)} genome from 2015 for this course. 
 		General information about the assembly can be found at Ensembl (\url{https://www.ensembl.org/Salmo_salar/Info/Index}).
 		On that page you also find links to FASTA files with the DNA sequence (reference genome) and gtf files with the Ensembl gene annotation.
 		
@@ -244,8 +244,11 @@ anchorcolor = blue]{hyperref}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
 						cd $dir_atac/ref_genome 
-						# Cut and paste the whole line might not work as expected, double check before executing
-						wget http://ftp.ensembl.org/pub/release-103/fasta/salmo_salar/dna/Salmo_ salar.ICSASG_v2.dna.toplevel.fa.gz
+						# Latex did not break up the link properly, you need to copy
+						# both parts of the URL seperately 
+						wget \
+						http://ftp.ensembl.org/pub/release-103/fasta/salmo_salar/dna
+						/Salmo_salar.ICSASG_v2.dna.toplevel.fa.gz
 						gunzip Salmo_salar.ICSASG_v2.dna.toplevel.fa.gz
 					\end{lstlisting}
 				\end{minipage}
@@ -280,7 +283,10 @@ anchorcolor = blue]{hyperref}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
 						# docker run pulls the container automatically if not available
-						docker run --mount $mnt_dir_atac juettemann/samtools:latest faidx /mnt/ref_genome/Salmo_salar.ICSASG_v2.dna.toplevel.fa
+						docker run \ 
+						--mount $mnt_dir_atac \ 
+						juettemann/samtools:latest faidx \ 
+						/mnt/ref_genome/Salmo_salar.ICSASG_v2.dna.toplevel.fa
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -303,7 +309,8 @@ anchorcolor = blue]{hyperref}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
 						cd $dir_atac/ref_genome/
-						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | cut -f 1 > Ssal_chrm.txt
+						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | \
+						cut -f 1 > Ssal_chrm.txt
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -326,7 +333,8 @@ anchorcolor = blue]{hyperref}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
 						cd $dir_atac/ref_genome/
-						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | cut -f 1,2 >Ssal_chrm_sizes.txt
+						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | \
+						 cut -f 1,2 >Ssal_chrm_sizes.txt
 					\end{lstlisting}
 				\end{minipage}
 	
@@ -359,7 +367,11 @@ anchorcolor = blue]{hyperref}
 				
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						docker run --mount $mnt_dir_atac juettemann/samtools:latest sort -n -o $dir_atac/results/genrich/B-1.sortedByRead.bam -@ 8 $dir_atac/data/B-1.bam	
+						docker run \
+						--mount $mnt_dir_atac \
+						juettemann/samtools:latest sort -n -@ 8 \
+						-o /mnt/results/genrich/B-1.sortedByRead.bam 
+						/mnt/data/B-1.bam	
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -392,7 +404,9 @@ anchorcolor = blue]{hyperref}
 				
 			\begin{minipage}{\linewidth}
 				\begin{lstlisting}
-					docker run --mount $mnt_dir_atac juettemann/genrich:1.0 \
+					docker run \
+					--mount $mnt_dir_atac \
+					juettemann/genrich:0.6 \
 					-t  /mnt/results/genrich/B-1.sortedByRead.bam \
 					-o /mnt/results/genrich/B-1.narrowPeak \
 					-k /mnt/results/genrich/B-1.k.bedGraph \
@@ -433,7 +447,8 @@ anchorcolor = blue]{hyperref}
 					\begin{minipage}{\linewidth}
 						\begin{lstlisting}
 							cd $dir_atac/results/genrich/
-							grep ^ssa B-1.k.bedGraph | cut -f 1-4 > B-1.k.fixed.bedGraph
+							grep ^ssa B-1.k.bedGraph | \
+							cut -f 1-4 > B-1.k.fixed.bedGraph
 						\end{lstlisting}
 					\end{minipage}
 					
@@ -458,7 +473,9 @@ anchorcolor = blue]{hyperref}
 	
 					\begin{minipage}{\linewidth}
 						\begin{lstlisting}
-							docker run --mount $mnt_dir_atac quay.io/biocontainers/ucsc-bedgraphtobigwig:377--h0b8a92a_2 \
+							docker run \
+							--mount $mnt_dir_atac \ 
+							quay.io/biocontainers/ucsc-bedgraphtobigwig:377--h0b8a92a_2 \
 							bedGraphToBigWig \ 
 							/mnt/results/genrich/B-1.k.fixed.bedGraph \
 							/mnt/ref_genome/Ssal_chrm_sizes.txt \
@@ -470,23 +487,27 @@ anchorcolor = blue]{hyperref}
 			The IGV browser is launched from the command line. 
 			Open a new terminal and run:\\
 			
-			\textbf{\$HOME/IGV\_Linux\_2.9.4/igv.sh}
+			\textbf{igv}
 			
 			
 		\subsubsection{Load Genome and Tracks}
 			IGV loads its genomes from the Broad Institute, and these genomes use RefSeq accessions as chromosome names. 
 			Refseq accessions are different from the ones used by the submitter of the genome (which Ensembl uses), therefore we need to load this standard genome manually.
 			
-			\begin{enumerate}
-				\item In the IGV window, click \textit{Genomes} -> \textit{Load Genome from File} -> navigate to  \textit{train-aquafaang-bioinf/atac-seq/ref\_genome/} and select \\
-				-> \textit{Salmo\_salar.ICSASG\_v2.dna.toplevel.fa} and \\
-				-> \textit{Salmo\_salar.ICSASG\_v2.103.chr.sorted.gtf}
-				\item In the IGV window, click \textit{File} -> \textit{Load from File} -> navigate to \textit{train-aquafaang-bioinf/atac-seq/results/genrich/} and select\\
-				-> \textit{B-1.bw} \\
-				-> \textit{B-1.narrowPeak} \\
-				-> \textit{L-1.bw} \\
-				-> \textit{L-1.narrowPeak}
-			\end{enumerate}
+			\paragraph{Task}
+			
+				\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
+					\begin{enumerate}
+						\item In the IGV window, click \textit{Genomes} -> \textit{Load Genome from File} -> navigate to  \textit{train-aquafaang-bioinf/atac-seq/ref\_genome/} and select \\
+						-> \textbf{Salmo\_salar.ICSASG\_v2.dna.toplevel.fa} 
+						\item In the IGV window, click \textit{File} -> \textit{Load from File} -> navigate to \textit{train-aquafaang-bioinf/atac-seq/results/genrich/} and select\\
+						-> \textit{Salmo\_salar.ICSASG\_v2.103.chr.sorted.gtf}
+						-> \textit{B-1.bw} \\
+						-> \textit{B-1.narrowPeak} \\
+						-> \textit{L-1.bw} \\
+						-> \textit{L-1.narrowPeak}
+					\end{enumerate}
+				}}
 		
 		If you want to go futher and  get an idea about the differences between the replicates, simply load all other *.bw and *.narrowPeak files the same way.
 		
@@ -506,8 +527,8 @@ anchorcolor = blue]{hyperref}
 			
 			\paragraph{hnf1a}
 			The genomic coordinates of hnf1a are  \textit{ssa20:19,522,855-19,530,228}. 
-			Copy and paste them in the seach box and click Go. 
-			In figure \ref{fig:hnf1a}, the roles are reversed - the liver sample shows open chromantin upstream of the hnf1a gene (peak\_51067).
+			Copy and paste them in the search box and click Go. 
+			In figure \ref{fig:hnf1a}, the roles are reversed - the liver sample shows open chromatin upstream of the hnf1a gene (peak\_51067).
 		
 			\begin{figure}[H]
 				\includegraphics[width=\textwidth]{hnf1a.png}
@@ -544,7 +565,10 @@ anchorcolor = blue]{hyperref}
 			\paragraph{Solution}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						docker run --mount $mnt_dir_atac juettemann/samtools index data/B-1.bam data/B-1.bam.bai
+						docker run \
+						--mount $mnt_dir_atac \
+						juettemann/samtools index \
+						/mnt/data/B-1.bam /mntdata/B-1.bam.bai
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -587,7 +611,7 @@ anchorcolor = blue]{hyperref}
 						\end{itemize}
 						\item Output
 							\begin{itemize}
-								\item metrics file 	 \$dir\_atac/results/ataqv/B-1.NCBI.ataqv.json
+								\item metrics file 	 \$dir\_atac/results/ataqv/B-1.ataqv.json
 							\end{itemize}
 					\end{enumerate}
 			}}
@@ -596,12 +620,15 @@ anchorcolor = blue]{hyperref}
 			
 			\begin{minipage}{\linewidth}
 				\begin{lstlisting}
-					docker run -e  TERM=xterm  --mount $mnt_dir_atac  \
-					quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 ataqv  Ssal data/B-1.bam \
+					docker run \
+					-e  TERM=xterm  \
+					--mount $mnt_dir_atac  \
+					quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 \
+					ataqv  Ssal /mnt/data/B-1.bam \
 					--peak-file /mnt/results/genrich/B-1.narrowPeak \
 					--tss-file /mnt/ref_genome/SsalTSS_NCBI.bed \
 					--autosomal-reference-file /mnt/ref_genome/Ssal_chrm.txt \
-					--metrics-file /mnt/results/ataqv/B-1.NCBI.ataqv.json
+					--metrics-file /mnt/results/ataqv/B-1.ataqv.json
 				\end{lstlisting}
 			\end{minipage}
 			
@@ -618,7 +645,7 @@ anchorcolor = blue]{hyperref}
 						\item Input
 						\begin{itemize}
 							\item results/mkarv/ataqv\_good\_html 
-							\item whitespace separated list of all 8 B \& L *.ataqv.json files, e.g.  \textbf{results/ataqv/B-1.NCBI.ataqv.json}  
+							\item whitespace separated list of all 8 B \& L *.ataqv.json files, e.g.  \textbf{results/ataqv/B-1.ataqv.json}  
 						\end{itemize}
 						\end{enumerate}
 				}}
@@ -632,9 +659,15 @@ anchorcolor = blue]{hyperref}
 						--mount $mnt_dir_atac  \
 						quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 \
 						mkarv   \
-						results/mkarv/ataqv_good_html \
-						results/ataqv/B-1.NCBI.ataqv.json results/ataqv/B-2.NCBI.ataqv.json results/ataqv/B-3.NCBI.ataqv.json results/ataqv/B-4.NCBI.ataqv.json \
-						results/ataqv/L-1.NCBI.ataqv.json results/ataqv/L-2.NCBI.ataqv.json results/ataqv/L-3.NCBI.ataqv.json  results/ataqv/L-4.NCBI.ataqv.json
+						/mnt/results/mkarv/ataqv_good_html \
+						/mnt/results/ataqv/B-1.ataqv.json \
+						/mnt/results/ataqv/B-2.ataqv.json \
+						/mnt/results/ataqv/B-3.ataqv.json \
+						/mnt/results/ataqv/B-4.ataqv.json \
+						/mnt/results/ataqv/L-1.ataqv.json \
+						/mnt/results/ataqv/L-2.ataqv.json \
+						/mnt/results/ataqv/L-3.ataqv.json \
+						/mnt/results/ataqv/L-4.ataqv.json
 					\end{lstlisting}
 				\end{minipage}
 			
@@ -650,7 +683,7 @@ anchorcolor = blue]{hyperref}
 						\item Input
 						\begin{itemize}
 							\item results/mkarv/ataqv\_bad\_html 
-							\item whitespace separated list of all 4 SP *.ataqv.json files, e.g.  \textbf{results/ataqv/SP-1.NCBI.ataqv.json}  
+							\item whitespace separated list of all 4 SP *.ataqv.json files, e.g.  \textbf{results/ataqv/SP-1.ataqv.json}  
 						\end{itemize}
 					\end{enumerate}
 			}}
@@ -659,13 +692,17 @@ anchorcolor = blue]{hyperref}
 			
 			\begin{minipage}{\linewidth}
 				\begin{lstlisting}
-					docker run \
-					-e  TERM=xterm  \
-					--mount $mnt_dir_atac  \
-					quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 \
+					docker run  \
+					-e  TERM=xterm \
+					
+					--mount $mnt_dir_atac \
+					quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1  \
 					mkarv   \
-					results/ataqv_bad_html
-					results/ataqv/SP-1.NCBI.ataqv.json results/ataqv/SP-2.NCBI.ataqv.json results/ataqv/SP-3.NCBI.ataqv.json results/ataqv/SP-4.NCBI.ataqv.json
+					/mnt/results/mkarv/ataqv_bad_html \
+					/mnt/results/ataqv/SP-1.ataqv.json \
+					/mnt/results/ataqv/SP-2.ataqv.json \
+					/mnt/results/ataqv/SP-3.ataqv.json \
+					/mnt/results/ataqv/SP-4.ataqv.json
 				\end{lstlisting}
 			\end{minipage}
 			
