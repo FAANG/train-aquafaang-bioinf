@@ -9,8 +9,14 @@ WORKDIR Genrich
 RUN make
 
 FROM ubuntu:20.04
+LABEL org.opencontainers.image.source https://github.com/FAANG/train-aquafaang-bioinf
+
 COPY --from=builder /Genrich/Genrich /usr/local/bin/
 WORKDIR /mnt
+
+COPY run_tests.sh /usr/local/bin/
+RUN  chmod 755 /usr/local/bin/run_tests.sh
+
 ENTRYPOINT ["Genrich"]
 CMD []
 
