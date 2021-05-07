@@ -37,7 +37,7 @@ Rough overview:
 
 ### Input Data
 
-The input data are bam files for 8 ATAC-seq samples mapped to the Atlantic salmon genome. There are four samples from brain (B), four from liver (L) and four from spleen (SP). These files can be downloaded from http://arken.nmbu.no/~lagr/atac-seq-training/data and placed in the "data" folder.
+The input data are bam files for 8 ATAC-seq samples mapped to the Atlantic salmon genome. There are four samples from brain (B), four from liver (L) and four from spleen (SP). These files can be downloaded from http://arken.nmbu.no/~lagr/atac-seq-training/data (Source will move to EBI soon) and placed in the "data" folder.
 
 The bam files are are sorted by mapping position. Duplicates/multimapped reads and reads mapping to mitochondrial chromosome or unplaced scaffolds have been removed.
 
