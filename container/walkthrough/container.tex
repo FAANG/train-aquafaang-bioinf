@@ -9,8 +9,13 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{adjustbox}
+\usepackage{lastpage}
+\usepackage{fancyvrb}
 
 \graphicspath{ {./images/} }
+
+
+
 
 \usepackage[colorlinks = true,
 linkcolor = blue,
@@ -39,7 +44,18 @@ anchorcolor = blue]{hyperref}
 \lstset{ 
 	upquote=true,
 	columns=fullflexible,
-	basicstyle=\ttfamily,
+	basicstyle=\small\ttfamily,
+	breaklines=true,
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+	breakatwhitespace=false,
+	backgroundcolor=\color{blue!20},
+%	backgroundcolor=\color{black},
+	showstringspaces=false,
+	showspaces=false,    
+	frameround=ffff,
+	frame=single,
+	rulecolor=\color{black},
+	autogobble=true,
 	literate={*}{{\char42}}1
 	{-}{{\char45}}1
 	{\ }{{\copyablespace}}1
@@ -48,18 +64,7 @@ anchorcolor = blue]{hyperref}
 \newcommand{\copyablespace}{\BeginAccSupp{method=hex,unicode,ActualText=00A0}\hphantom{x}\EndAccSupp{}}
 
 % Make boxes for code
-\lstset{
-	basicstyle=\small\ttfamily,
-	columns=flexible,
-	breaklines=true,
-	breakatwhitespace=false,
-	backgroundcolor=\color{blue!20},
-	showstringspaces=false,
-	frameround=ffff,
-	frame=single,
-	rulecolor=\color{black},
-	autogobble=true
-}
+
 \definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
 % Highlight keywords
 \lstset{
@@ -86,30 +91,7 @@ anchorcolor = blue]{hyperref}
 		\$blast\_c
 	},emphstyle=[8]{\color{TealBlue}\itshape},%
 }%
-%\lstdefinelanguage{mylang}{ %
-%	alsoletter=.\_/:,%
-%}%
 
-%\makeatletter
-%\newenvironment{btHighlight}[1][]
-%{\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
-%	{\end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup}
-%
-%\newcommand\btHL[1][]{%
-%	\begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
-%	}
-%	\def\bt@HL@endenv{%
-%	\end{btHighlight}%   
-%	\egroup
-%}
-%\newcommand{\bt@HL@box}[2][]{%
-%	\tikz[#1]{%
-%		\pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
-%		\pgfusepath{use as bounding box}%
-%		\node[anchor=base west, fill=orange!30,outer sep=0pt,inner xsep=1pt, inner ysep=0pt, rounded corners=3pt, minimum height=\ht\strutbox+1pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
-%	}%
-%}
-%\makeatother
 
 
 \usepackage{fancyhdr}
@@ -121,7 +103,7 @@ anchorcolor = blue]{hyperref}
 %\fancyhfoffset[R]{2cm} % right extra length
 \rhead{\today}
 \lhead{\bfseries Container tutorial}
-\rfoot{}
+\cfoot{Page \thepage \hspace{1pt}  of {\hypersetup{linkcolor=black}\pageref{LastPage}}} 
 \rhead{\includegraphics[width=1cm]{logo}}
 
 
@@ -134,12 +116,19 @@ anchorcolor = blue]{hyperref}
 	\date{May 10-12, 2021}  %\today is replaced with the current date
 	\maketitle
 	
-	
+
 	\section{Introduction}
+		The aim of this tutorial is to help you understand how container and docker works.
+		While bioinformatic tools are used for some examples, they are not the main focus.
+		Two versions of the document exist, one with, and without the solutions.
+		Use the solutions at any time you are stuck, or of course to check if you your solution is correct.
+		Finishing everything is not important, focus on understanding each step and play around! 
+		
+	
 	
 	\section{Docker Hub}
-	Docker Hub is the world’s largest repository of container images, at the time of this course it hosts 8.3 million repositories. 
-	In this section we explore a couple of repositories and run our first container.
+		Docker Hub is the world’s largest repository of container images, at the time of this course it hosts 8.3 million repositories. 
+		In this section we explore a couple of repositories and run our first container.
 	
 		\subsection{Hello World}
 			Because that is how every IT adventure begins.
@@ -148,8 +137,9 @@ anchorcolor = blue]{hyperref}
 			\paragraph{Task}
 				\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
 						\begin{enumerate}
-							\item On Dockerhub find the official  \textbf{hello-world} image and click on it.
-							\item In the description page, find and execute the docker run command in the terminal.
+							\item On Dockerhub, find the official  \textbf{hello-world} image and click on it.
+							\item In the description page, find the \textbf{docker run } command.
+							\item Execute  in a terminal window.
 						\end{enumerate}
 				}}
 			
@@ -165,6 +155,7 @@ anchorcolor = blue]{hyperref}
 	
 		\subsection{Versions}
 			Dockerhub offers to host several versions of a software.
+			These versions are called tags
 			Here we take a quick look at the similarity and differences using PostgreSQL as an example.
 			 
 			\paragraph{Task}
@@ -204,7 +195,7 @@ anchorcolor = blue]{hyperref}
 			
 			\subsubsection{Finding an image} 
 				As a community driven project, BioContainers does not have the notion of an "official image", and therefore no such filter exists.
-				Those images are usually used (=pulled) much more often than others.
+				Those images are usually used (=\textit{pulled}) much more often than others.
 				We exploit that fact to find the "official" NCBI version of BLAST.
 
 				\paragraph{Task}
@@ -213,7 +204,7 @@ anchorcolor = blue]{hyperref}
 								\item Got to \url{https://biocontainers.pro/}
 								\item Click on Registry (wait for the search interface to load)
 								\item Search for \textbf{blast}
-								\item Below the search bar, change the sorting from "Default" to "Pull No" and the sort order from "Asc" to "Desc".
+								\item Below the search bar, change the sorting from "\textbf{Default}" to "\textbf{Pull No}" and the sort order from "\textbf{Asc}" to "\textbf{Desc}".
 								\item The NCBI image is the first or second hit, click on it
 							\end{enumerate}
 					}}
@@ -247,16 +238,16 @@ anchorcolor = blue]{hyperref}
 				
 						\begin{minipage}{\linewidth}
 							\begin{lstlisting}
-								docker pull \
-								quay.io/biocontainers/blast:2.11.0--pl526he19e7b1_0
-								export blast_c=\
-								'quay.io/biocontainers/blast:2.11.0--pl526he19e7b1_0'
+								docker pull quay.io/biocontainers/blast:2.11.0--pl526he19e7b1_0
+								export blast_c='quay.io/biocontainers/blast:2.11.0--pl526he19e7b1_0'
 								docker images #alternative: docker image ls
 							\end{lstlisting}
 						\end{minipage}
 		
 			\subsubsection{Inspecting an image}
-				Time to play with the image!  and see if in the \textit{config section} \textbf{WorkingDir} or \textbf{Entrypoint} are set, and which \textbf{command} is executed when the container starts?
+				Time to explore the image!  
+				Docker provides low-level information (by default in JSON format) for all objects.
+				Finding out what happened to a failed container or getting information about an image is done by inspecting the object.
 	
 				\paragraph{Task}
 					\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
@@ -275,39 +266,38 @@ anchorcolor = blue]{hyperref}
 					
 					\begin{minipage}{\linewidth}
 						\begin{lstlisting}
-							docker inspect $blast_c 
-							docker inspect -f \
-							'{{json .Config.WorkingDir}} \
-							{{json .Config.Entrypoint}} \
-							{{json .Config.Cmd}}' \ 
-							$blast_c
-							# "" null ["/bin/sh"]
+							# Everything
+							docker inspect $blast_c
+							# Specific infomation 
+							docker inspect -f '{{json .Config.WorkingDir}} 	{{json .Config.Entrypoint}}	{{json .Config.Cmd}}' $blast_c
+							# Result: "" null ["/bin/sh"]
 						\end{lstlisting}
 				\end{minipage}
 		
 			\subsubsection{From image to container}		
-				A docker image is build from the instructions in a docker file.  			
+				A docker image is build from the instructions in a dockerfile.  			
 				The image is then used as a template (or base), which we can copy and use to run an application. 
 				The application needs an isolated environment in which to run: a container.
 				From the BLAST image that we downloaded, we will create a container, and using that container we will create a BLAST database, and then query this database using blastp.
 					
-				The \textit{~/train-aquafaang-bioinf/container/data} directory contains a FASTA file with zebrafish proteins in FASTA format. 
-				Using the blast container, we will create a BLAST database from the FASTA file.
+%				The \textit{~/train-aquafaang-bioinf/container/data} directory contains a FASTA file with zebrafish proteins in FASTA format. 
+%				Using the blast container, we will create a BLAST database from the FASTA file.
 				makeblastdb takes 2 arguments: 
 				
 				\begin{enumerate}
-					\item -in path/to/input/fasta  
-					\item -dbtype ()prot or nucl)
+					\item \textbf{-in} \textit{path/to/input/fasta}  
+					\item \textbf{-dbtype} \textit{prot or nucl}
 					\item Documentation: \url{https://ncbi.github.io/magicblast/cook/blastdb.html}
 				\end{enumerate}
 				
 				Keep in mind that docker can not access any files in our local filesystem, unless it is mounted. 
 				Remember that mount takes 3 arguments: 
+				
 				\begin{enumerate}
 					\item type (usually bind)  
 					\item source (absolute path to the directory outside the container)
 					\item target (absolute path to the directory inside the container )
-					\item Documentation:  \url{https://docs.docker.com/storage/}
+					\item Documentation (bind mounts): \url{https://docs.docker.com/storage/bind-mounts/}
 				\end{enumerate}
 			
 		
@@ -315,7 +305,8 @@ anchorcolor = blue]{hyperref}
 			\paragraph{Task}
 				\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
 					\begin{enumerate}
-						\item Using the BLAST container (=\$blast\_c), create a BLAST database with \textbf{makeblastdb} 						
+						\item Using the BLAST container (=\$blast\_c), create a BLAST database (\textbf{makeblastdb}).
+						\item Sequence in FASTA format is available at \textbf{\$HOME/train-aquafaang-bioinf/container/data/zebrafish.1.protein.faa}		
 					\end{enumerate}
 				}}
 			
@@ -323,22 +314,14 @@ anchorcolor = blue]{hyperref}
 		
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-					 docker run \
-					 --mount \
-					 type=bind, \
-					 source=$HOME/train-aquafaang-bioinf/container/data, \
-					 target=/mnt  \
-					 $blast_c \
-					 makeblastdb -in /mnt/zebrafish.1.protein.faa -dbtype prot
+					 docker run --mount type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt  $blast_c makeblastdb -in /mnt/zebrafish.1.protein.faa -dbtype prot
 		 			\end{lstlisting}
 				\end{minipage}
 			
 			\subsubsection{Life inside a container}
 				To gain a better understanding of a container, we will run the actual alignment inside the container. 
-				If you are not sure about the parameters, remember that docker offers help for each sub command (e.g. docker run --help).
-				We want to know which user you are inside a container, and where all executables are located.
-			
-			
+				We also want to know which user you are inside a container, and where all executables are located.
+				If you are not sure about the parameters, remember that docker offers help for each sub command (e.g.  \textit{docker run --help} ).
 			
 			\paragraph{Task}
 				\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
@@ -364,7 +347,8 @@ anchorcolor = blue]{hyperref}
 					\end{lstlisting}
 				\end{minipage}	
 			
-				Now let us explore the effect of mounting.
+				\paragraph{Mounting}
+					Mounting local storage into a container is essential for any type of data analysis and will be used frequently in this course.
 			
 				\paragraph{Task}
 					\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
@@ -377,13 +361,13 @@ anchorcolor = blue]{hyperref}
 		
 					\begin{minipage}{\linewidth}
 						\begin{lstlisting}
-						docker run -it 	--mount type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt  \
-						$blast_c bash
+						docker run -it 	--mount type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt  $blast_c bash
 					\end{lstlisting}
 				\end{minipage}
 			
  			\paragraph{Explore a running container}
-		
+				Another way of understanding container is exploring a running container.
+				Here we have a look at the state and the inside of it.
 	
 			\paragraph{Task}
 				\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
@@ -403,13 +387,13 @@ anchorcolor = blue]{hyperref}
 					\begin{lstlisting}
 						docker container ls
 						docker inspect <container_id>
-						OR 
+						# OR 
 						docker inspect -f '{{json .Config.Cmd}} {{json .Mounts}}' <container_id>
 					\end{lstlisting}
 				\end{minipage}		
 	
 			\paragraph{Execute a command in a running container}
-				The docker exec command runs a new command in a running container.
+				The \textit{docker exec }command runs a new command in a running container.
 			Using exec on the running container, execute a ls -l and a ls -l /mnt.
 			What do you see?
 	
@@ -434,7 +418,7 @@ anchorcolor = blue]{hyperref}
 			
 			There are 3 ways of running the alignment:
 			\begin{enumerate}
-				\item Using the container the same way as we did with makeblastdb (swap makeblastdb for blastp). This is the most common solution in a workflow / pipeline or ad-hoc situation.
+				\item Using the container the same way as we did with \textit{makeblastdb} (swap makeblastdb for blastp). This is the most common solution in a workflow / pipeline or ad-hoc situation.
 				\item Using docker exec while the first container is still running. This creates a basic version of a BLAST server that can be accessible to other users on the same server.
 				\item Running blastp inside the first container. Mostly used for debugging or development.
 			\end{enumerate}
@@ -444,8 +428,8 @@ anchorcolor = blue]{hyperref}
 						\begin{enumerate}
 							\item Run the alignment in all 3 different ways.
 							\item Use different names for the out file
-							\item To make the mounting short, create a environment variable:
-							\textit{export docker\_mount="type=bind,source=\$HOME/train-aquafaang-bioinf/container/data,target=/mnt"}
+							\item To make the mounting short, create a environment variable: \\
+							\textbf{export docker\_mount="type=bind,source=\$HOME/train-aquafaang-bioinf/container/data,target=/mnt"}
 							\item Exit the running container
 						\end{enumerate}
 				}}
@@ -454,42 +438,35 @@ anchorcolor = blue]{hyperref}
 	
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						export docker_mount= \
-						"type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt"
+						export docker_mount="type=bind,source=$HOME/train-aquafaang-bioinf/container/data,target=/mnt"
 						# 1
-						docker run \
-						--mount $docker_mount \
-						$blast\_c blastp \
-						-query /mnt/P04156.fasta \
-						-db /mnt/zebrafish.1.protein.faa \
-						-out /mnt/result-1.txt
+						docker run --mount $docker_mount $blast\_c blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa -out /mnt/result-1.txt
 						# 2
-						docker exec <container_id> \
-						blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa \
-						-out /mnt/result-2.txt
+						docker exec <container_id> blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa -out /mnt/result-2.txt
 						# 3
-						blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa \
-						-out /mnt/result-3.txt
+						blastp -query /mnt/P04156.fasta -db /mnt/zebrafish.1.protein.faa -out /mnt/result-3.txt
 					\end{lstlisting}
 				\end{minipage}
 				
 			
 			\section{Cleaning up}
-				In the last section we will be looking at how to stop rouge containers and how to get rid of unused containers and images.
+				In the this section we will be looking at how to stop rouge containers and how to get rid of unused containers and images.
 			
-				\subsubsection{Stop or get killed}
+				\subsection{Stop or get killed}
 					Containers are meant to be replaceable. 
 					If a container becomes inactive, it is easy to replace it with a new one. 
 					But how to get rid of a hanging container? 
-					Similar to Unix, also Docker has a \textit{kill} command.
+					Docker has two ways of getting rid of unwanted containers: stop (kill -15, then kill -9) or kill (kill -9). 
+					More information can be found at \url{https://docs.docker.com/engine/reference/commandline/docker/} 
+
 					\paragraph{Task}
 						\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
 							\begin{enumerate}
 								\item Download the latest alpine image
-								\item Run an alpine container using the -i options, nothing else
+								\item Run an alpine container using the -i option, nothing else
 								\item In a second terminal, list all running container
 								\item Copy the \textit{<container ID}> of the alpine container
-								\item Stop or Kill the container
+								\item Stop or Kill the container using the container ID
 							\end{enumerate}
 					}}
 					
@@ -506,8 +483,9 @@ anchorcolor = blue]{hyperref}
 					\end{lstlisting}
 				\end{minipage}
 
-				\subsubsection{Spring cleaning}
-					Docker takes a conservative approach to cleaning up unused objects (often referred to as “garbage collection”), such as images, containers, volumes, and networks: these objects are generally not removed unless you explicitly ask Docker to do so. 
+				\subsection{Spring cleaning}
+					Docker takes a conservative approach to cleaning up unused objects (often referred to as “garbage collection”), such as images, containers, volumes, and networks.
+					These objects are generally not removed unless you explicitly ask Docker to do so. 
 					This can cause Docker to use extra disk space. 
 					For each type of object, Docker provides a prune command. 
 					In addition, you can use docker system prune to clean up multiple types of objects at once. 
@@ -533,5 +511,75 @@ anchorcolor = blue]{hyperref}
 							\end{lstlisting}
 						\end{minipage}
 				
+	\section{Create your own}
+		Lastly, a peak into writing your own Dockerfile.
+		This exercise ties everything together and will require you to do some reading to understand the different components.
+		Dockerfiles are sets of instructions, and it always in the format \textit{ \textbf{INSTRUCTION arguments}}.
+		Instructions used in this tutorial are \textbf{FROM, WORKDIR, COPY, ENTRYPOINT, CMD}.
+		Look at \url{https://docs.docker.com/engine/reference/builder/} for more information about each.
+		
+		Each dockerfile starts with a base image, indicated by FROM, e.g. \textbf{FROM ubuntu:latest} .
+		COPY is used to copy local files into the image, e.g. \textbf{COPY ./requirements.txt .} , which copies requirements.txt  to the current (root) directory of the image.
+		WORKDIR is the equivalent of the unix \textit{cd}.
+		ENTRYPOINT indicates the command that should be executed everytime the starts. 
+		CMD is used to provide defaults for an executing container.
+
+		
+		\paragraph{Task}
+			\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%
+					\begin{enumerate}
+						\item CD into \textbf{\$HOME/train-aquafaang-bioinf/container/hello\_world}
+						\item Using your favourite editor, create a file called \textbf{Dockerfile}
+						\item Use python 3 as your base image
+						\item Change the working directory in the image to \textbf{/usr/src/app}
+						\item Copy \textbf{ \$HOME/train-aquafaang-bioinf/container/data/hello\_world.py} into the current working dir (".")
+						\item Set the entrypoint to python
+						\item Set the default argument to \textbf{hello\_world.py}
+						\item  \textbf{Build} your container, using the \textbf{tag} \textit{your\_name/hello\_world:latest}
+						\item \textbf{Run} your container
+						\item Documentation: Go to dockerhub and find the official python image
+					\end{enumerate}
+			}}
+		
+		\paragraph{Solution}	
+		
+			\begin{minipage}{\linewidth}
+				\begin{lstlisting}
+					# Dockerfile
+					FROM python:3
+					WORKDIR /usr/src/app
+					COPY ./hello_world.py .
+					ENTRYPOINT ["python"]
+					CMD ["hello_world.py"]
+					# Build
+					docker build -t juettemann/hello_world:latest .
+					# Run
+					docker run juettemann/hello_world:latest
+				\end{lstlisting}
+			\end{minipage}
+	
+			\paragraph{Task}
+			
+			You can use the Python image that you downloaded also to execute scripts that are not part of your container.
+			This can be really helpful if you need a certain version of a software that you can install in an environment.
+			
+		\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%
+				\begin{enumerate}
+					\item Create a container from the python 3 base image and execute the hello\_world.py
+				\end{enumerate}
+		}}
+		
+		\paragraph{Solution}	
+		
+		\begin{minipage}{\linewidth}
+			\begin{lstlisting}
+				# 1
+				docker run  --mount type=bind,source="$PWD",target=/mnt  python:3 python /mnt/hello_world.py
+				# 2
+				docker run  --mount type=bind,source="$PWD",target=/mnt  -w /mnt python:3 python hello_world.py
+			\end{lstlisting}
+		\end{minipage}
+	
+	
 
 \end{document}  %End of document.

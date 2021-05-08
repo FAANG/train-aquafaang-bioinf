@@ -39,27 +39,26 @@ anchorcolor = blue]{hyperref}
 \lstset{ 
 	upquote=true,
 	columns=fullflexible,
-	basicstyle=\ttfamily,
-		literate={*}{{\char42}}1
-		{-}{{\char45}}1
-		{\ }{{\copyablespace}}1
+	basicstyle=\small\ttfamily,
+	breaklines=true,
+	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+	breakatwhitespace=false,
+	backgroundcolor=\color{blue!20},
+	showstringspaces=false,
+	showspaces=false,    
+	frameround=ffff,
+	frame=single,
+	rulecolor=\color{black},
+	autogobble=true,
+	literate={*}{{\char42}}1
+	{-}{{\char45}}1
+	{\ }{{\copyablespace}}1
 }
 \usepackage[space=true]{accsupp}
 \newcommand{\copyablespace}{\BeginAccSupp{method=hex,unicode,ActualText=00A0}\hphantom{x}\EndAccSupp{}}
 
 % Make boxes for code
-\lstset{
-	basicstyle=\small\ttfamily,
-	columns=flexible,
-	breaklines=true,
-	breakatwhitespace=true,
-	backgroundcolor=\color{blue!20},
-	showstringspaces=true,
-	frameround=ffff,
-	frame=single,
-	rulecolor=\color{black},
-	autogobble=true
-}
+
 \definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
 % Highlight keywords
 \lstset{
@@ -243,12 +242,8 @@ anchorcolor = blue]{hyperref}
 			%	\vspace{0.5cm}	
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						cd $dir_atac/ref_genome 
-						# Latex did not break up the link properly, you need to copy
-						# both parts of the URL seperately 
-						wget \
-						http://ftp.ensembl.org/pub/release-103/fasta/salmo_salar/dna
-						/Salmo_salar.ICSASG_v2.dna.toplevel.fa.gz
+						cd $dir_atac/ref_genome  
+						wget http://ftp.ensembl.org/pub/release-103/fasta/salmo_salar/dna/Salmo_salar.ICSASG_v2.dna.toplevel.fa.gz
 						gunzip Salmo_salar.ICSASG_v2.dna.toplevel.fa.gz
 					\end{lstlisting}
 				\end{minipage}
@@ -283,10 +278,7 @@ anchorcolor = blue]{hyperref}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
 						# docker run pulls the container automatically if not available
-						docker run \ 
-						--mount $mnt_dir_atac \ 
-						juettemann/samtools:latest faidx \ 
-						/mnt/ref_genome/Salmo_salar.ICSASG_v2.dna.toplevel.fa
+						docker run --mount $mnt_dir_atac juettemann/samtools:latest faidx /mnt/ref_genome/Salmo_salar.ICSASG_v2.dna.toplevel.fa
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -309,8 +301,7 @@ anchorcolor = blue]{hyperref}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
 						cd $dir_atac/ref_genome/
-						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | \
-						cut -f 1 > Ssal_chrm.txt
+						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | cut -f 1 > Ssal_chrm.txt
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -333,8 +324,7 @@ anchorcolor = blue]{hyperref}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
 						cd $dir_atac/ref_genome/
-						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | \
-						 cut -f 1,2 >Ssal_chrm_sizes.txt
+						grep ^ssa Salmo_salar.ICSASG_v2.dna.toplevel.fa.fai | cut -f 1,2 >Ssal_chrm_sizes.txt
 					\end{lstlisting}
 				\end{minipage}
 	
@@ -369,9 +359,7 @@ anchorcolor = blue]{hyperref}
 					\begin{lstlisting}
 						docker run \
 						--mount $mnt_dir_atac \
-						juettemann/samtools:latest sort -n -@ 8 \
-						-o /mnt/results/genrich/B-1.sortedByRead.bam 
-						/mnt/data/B-1.bam	
+						juettemann/samtools:latest sort -n -@ 8 -o /mnt/results/genrich/B-1.sortedByRead.bam /mnt/data/B-1.bam	
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -394,7 +382,7 @@ anchorcolor = blue]{hyperref}
 								\item print status to stderr
 								\item ATAC-seq mode 
 							\end{itemize}
-							\item Redirect the STDERR output to \textbf{genrich\_B-1.log}
+							\item Redirect the STDERR output to \textbf{\$dir\_atac/logs/genrich\_B-1.log}
 						\end{itemize}
 					\end{enumerate}
 			}}
@@ -404,15 +392,7 @@ anchorcolor = blue]{hyperref}
 				
 			\begin{minipage}{\linewidth}
 				\begin{lstlisting}
-					docker run \
-					--mount $mnt_dir_atac \
-					juettemann/genrich:0.6 \
-					-t  /mnt/results/genrich/B-1.sortedByRead.bam \
-					-o /mnt/results/genrich/B-1.narrowPeak \
-					-k /mnt/results/genrich/B-1.k.bedGraph \
-					-q 0.05 \
-					-v -j \
-					2> genrich_B-1.log
+					docker run --mount $mnt_dir_atac juettemann/genrich:0.6 -t  /mnt/results/genrich/B-1.sortedByRead.bam -o /mnt/results/genrich/B-1.narrowPeak -k /mnt/results/genrich/B-1.k.bedGraph -q 0.05 -v -j 2> $dir_atac/logs/genrich_B-1.log
 				\end{lstlisting}
 			\end{minipage}
 	
@@ -429,7 +409,7 @@ anchorcolor = blue]{hyperref}
 				The main advantage of the bigWig files is that only the portions of the files needed to display a particular region are transferred, so for large data sets bigWig is considerably faster than any non-indexed formats.
 
 
-			\paragraph{Create bedGraph}
+			\paragraph{Create compliant bedGraph }
 				The  .bedGraph-ish out from Genrich can easily be converted to bigWig. 
 				To create a compliant bedGraph file, extra columns and headers must be removed. 
 				
@@ -447,18 +427,16 @@ anchorcolor = blue]{hyperref}
 					\begin{minipage}{\linewidth}
 						\begin{lstlisting}
 							cd $dir_atac/results/genrich/
-							grep ^ssa B-1.k.bedGraph | \
-							cut -f 1-4 > B-1.k.fixed.bedGraph
+							grep ^ssa B-1.k.bedGraph | cut -f 1-4 > B-1.k.fixed.bedGraph
 						\end{lstlisting}
 					\end{minipage}
 					
+					
+			\paragraph{Create bigWig}
 					UCSC provides a tool to convert bedGraph to bigWig (part of the Kent tools). It takes 3 arguments:\\
 					
 					 \textbf{bedGraphToBigWig} <i\textit{in.bedGraph}> <\textit{chrom.sizes}> <\textit{outBigWig.bw}>\\
-					
-%					Using bedgraphtobigwig, convert \textit{B-1.k.fixed.bedGraph} to \textit{B-1.bw} and store it in the \textit{\$dir\_atac/results/genrich} directory.\\ 
-%					bedGraphToBigWig takes 3 parameters: in.bedGraph, chrom.sizes, out.bw. \\
-%					Please note that workdir is not set in the docker image. Therefore the path to the input files need to be absolute, e.g. \textit{ /mnt/results/genrich/B-1.k.fixed.bedGraph}. Alternatively, docker can be run with --workdir="/mnt".
+				
 					
 				\paragraph{Task}
 
@@ -473,21 +451,21 @@ anchorcolor = blue]{hyperref}
 	
 					\begin{minipage}{\linewidth}
 						\begin{lstlisting}
-							docker run \
-							--mount $mnt_dir_atac \ 
-							quay.io/biocontainers/ucsc-bedgraphtobigwig:377--h0b8a92a_2 \
-							bedGraphToBigWig \ 
-							/mnt/results/genrich/B-1.k.fixed.bedGraph \
-							/mnt/ref_genome/Ssal_chrm_sizes.txt \
-							/mnt/results/genrich/B-1.bw
+							docker run --mount $mnt_dir_atac quay.io/biocontainers/ucsc-bedgraphtobigwig:377--h0b8a92a_2 bedGraphToBigWig /mnt/results/genrich/B-1.k.fixed.bedGraph /mnt/ref_genome/Ssal_chrm_sizes.txt /mnt/results/genrich/B-1.bw
 						\end{lstlisting}
 					\end{minipage}
 		
 		\subsubsection{Launch IGV}
 			The IGV browser is launched from the command line. 
-			Open a new terminal and run:\\
 			
-			\textbf{igv}
+				\paragraph{Task}
+			
+			\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
+					\begin{enumerate}
+						\item  Open a new terminal and run
+						\item  igv
+					\end{enumerate}
+			}}
 			
 			
 		\subsubsection{Load Genome and Tracks}
@@ -565,10 +543,7 @@ anchorcolor = blue]{hyperref}
 			\paragraph{Solution}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						docker run \
-						--mount $mnt_dir_atac \
-						juettemann/samtools index \
-						/mnt/data/B-1.bam /mntdata/B-1.bam.bai
+						docker run --mount $mnt_dir_atac juettemann/samtools index /mnt/data/B-1.bam /mntdata/B-1.bam.bai
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -620,15 +595,7 @@ anchorcolor = blue]{hyperref}
 			
 			\begin{minipage}{\linewidth}
 				\begin{lstlisting}
-					docker run \
-					-e  TERM=xterm  \
-					--mount $mnt_dir_atac  \
-					quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 \
-					ataqv  Ssal /mnt/data/B-1.bam \
-					--peak-file /mnt/results/genrich/B-1.narrowPeak \
-					--tss-file /mnt/ref_genome/SsalTSS_NCBI.bed \
-					--autosomal-reference-file /mnt/ref_genome/Ssal_chrm.txt \
-					--metrics-file /mnt/results/ataqv/B-1.ataqv.json
+					docker run -e  TERM=xterm  --mount $mnt_dir_atac quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 	ataqv  Ssal  /mnt/data/B-1.bam --peak-file /mnt/results/genrich/B-1.narrowPeak 	--tss-file /mnt/ref_genome/SsalTSS_NCBI.bed --autosomal-reference-file /mnt/ref_genome/Ssal_chrm.txt --metrics-file /mnt/results/ataqv/B-1.ataqv.json
 				\end{lstlisting}
 			\end{minipage}
 			
@@ -654,20 +621,7 @@ anchorcolor = blue]{hyperref}
 				
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						docker run \
-						-e  TERM=xterm  \
-						--mount $mnt_dir_atac  \
-						quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 \
-						mkarv   \
-						/mnt/results/mkarv/ataqv_good_html \
-						/mnt/results/ataqv/B-1.ataqv.json \
-						/mnt/results/ataqv/B-2.ataqv.json \
-						/mnt/results/ataqv/B-3.ataqv.json \
-						/mnt/results/ataqv/B-4.ataqv.json \
-						/mnt/results/ataqv/L-1.ataqv.json \
-						/mnt/results/ataqv/L-2.ataqv.json \
-						/mnt/results/ataqv/L-3.ataqv.json \
-						/mnt/results/ataqv/L-4.ataqv.json
+						docker run -e  TERM=xterm --mount $mnt_dir_atac quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1 mkarv  /mnt/results/mkarv/ataqv_good_html /mnt/results/ataqv/B-1.ataqv.json /mnt/results/ataqv/B-2.ataqv.json /mnt/results/ataqv/B-3.ataqv.json /mnt/results/ataqv/B-4.ataqv.json /mnt/results/ataqv/L-1.ataqv.json /mnt/results/ataqv/L-2.ataqv.json /mnt/results/ataqv/L-3.ataqv.json /mnt/results/ataqv/L-4.ataqv.json
 					\end{lstlisting}
 				\end{minipage}
 			
@@ -692,17 +646,7 @@ anchorcolor = blue]{hyperref}
 			
 			\begin{minipage}{\linewidth}
 				\begin{lstlisting}
-					docker run  \
-					-e  TERM=xterm \
-					
-					--mount $mnt_dir_atac \
-					quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1  \
-					mkarv   \
-					/mnt/results/mkarv/ataqv_bad_html \
-					/mnt/results/ataqv/SP-1.ataqv.json \
-					/mnt/results/ataqv/SP-2.ataqv.json \
-					/mnt/results/ataqv/SP-3.ataqv.json \
-					/mnt/results/ataqv/SP-4.ataqv.json
+					docker run  -e  TERM=xterm --mount $mnt_dir_atac quay.io/biocontainers/ataqv:1.2.1--py27h97b49fa_1  mkarv /mnt/results/mkarv/ataqv_bad_html /mnt/results/ataqv/SP-1.ataqv.json /mnt/results/ataqv/SP-2.ataqv.json /mnt/results/ataqv/SP-3.ataqv.json /mnt/results/ataqv/SP-4.ataqv.json
 				\end{lstlisting}
 			\end{minipage}
 			

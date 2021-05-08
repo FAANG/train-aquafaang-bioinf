@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.4.20)  6 MAY 2021 18:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.4.20)  7 MAY 2021 17:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -664,24 +664,24 @@ LaTeX Warning: Label `table:genrich' multiply defined.
 )
 \openout1 = `atac.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 127.
-LaTeX Font Info:    ... okay on input line 127.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 126.
+LaTeX Font Info:    ... okay on input line 126.
  (/usr/local/texlive/2021/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count303
@@ -738,7 +738,7 @@ e
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 127.
+Package hyperref Info: Link coloring ON on input line 126.
 (/usr/local/texlive/2021/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2021-04-02 v2.47 Cross-referencing by name of section
 
@@ -751,81 +751,84 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count309
 )
-LaTeX Info: Redefining \ref on input line 127.
-LaTeX Info: Redefining \pageref on input line 127.
-LaTeX Info: Redefining \nameref on input line 127.
+LaTeX Info: Redefining \ref on input line 126.
+LaTeX Info: Redefining \pageref on input line 126.
+LaTeX Info: Redefining \nameref on input line 126.
  (./atac.out) (./atac.out)
 \@outlinefile=\write4
 \openout4 = `atac.out'.
 
 \c@lstlisting=\count310
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <14.4> on input line 139.
+(Font)              <14.4> on input line 138.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 139.
+(Font)              <7> on input line 138.
 LaTeX Font Info:    Trying to load font information for T1+fvm on input line 13
-9.
+8.
 
 (/usr/local/texlive/2021/texmf-dist/tex/latex/bera/t1fvm.fd
 File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 )
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 158.
+(Font)              <12> on input line 157.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 158.
+(Font)              <8> on input line 157.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 158.
+(Font)              <6> on input line 157.
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--166
+Underfull \hbox (badness 10000) in paragraph at lines 165--165
 [][][]\T1/ptm/m/n/12 quay.io/biocontainers/ucsc-
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 166--167
+Underfull \hbox (badness 10000) in paragraph at lines 165--166
 [][][]$\T1/ptm/m/n/12 https : / / genome . ucsc . edu / goldenPath /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 169--169
+Underfull \hbox (badness 10000) in paragraph at lines 168--168
 [][][]\T1/ptm/m/n/12 quay.io/biocontainers/ataqv:1.2.1
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 169--170
+Underfull \hbox (badness 10000) in paragraph at lines 168--169
 [][][]$\T1/ptm/m/n/12 https : / / github . com / juettemann / ataqv / tree /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 189--190
+Underfull \hbox (badness 10000) in paragraph at lines 188--189
 [][][]$\T1/ptm/m/n/12 https : / / genome . ucsc . edu / ENCODE /
  []
 
 
-Underfull \hbox (badness 1331) in paragraph at lines 191--191
+Underfull \hbox (badness 1331) in paragraph at lines 190--190
 []\T1/ptm/m/n/12 Genome Browser Sig-nal (Wig-gle)
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 191--192
+Underfull \hbox (badness 10000) in paragraph at lines 190--191
 [][][]$\T1/ptm/m/n/12 https : / / genome . ucsc . edu / ENCODE /
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 193--194
+Underfull \hbox (badness 10000) in paragraph at lines 192--193
 [][][]$\T1/ptm/m/n/12 https : / / genome . ucsc . edu / FAQ / FAQformat .
  []
 
 [1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 239--240
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <10.95> on input line 211.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 238--239
 [][][] 
  []
 
 <./images//logo.png, id=115, 1478.25pt x 1355.0625pt>
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 241.
+Package pdftex.def Info: ./images//logo.png  used on input line 240.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -836,13 +839,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [2 <./images//logo.png>]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 279--280
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 274--275
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 281.
+Package pdftex.def Info: ./images//logo.png  used on input line 285.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -853,18 +856,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [3]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 305--306
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 297--298
 [][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 329--329
+Underfull \hbox (badness 10000) in paragraph at lines 320--320
 []\T1/ptm/m/n/12 Store the names in the \T1/ptm/b/n/12 $dir_atac/ref_genome \T1
 /ptm/m/n/12 folder in a file named
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 329--330
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 320--321
 [][][] 
  []
 
@@ -881,19 +884,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [4]
-Underfull \hbox (badness 6608) in paragraph at lines 364--364
+Underfull \hbox (badness 6608) in paragraph at lines 354--354
 []\T1/ptm/m/n/12 Name the out-put file \T1/ptm/b/n/12 B-1.sortedByRead.bam \T1/
 ptm/m/n/12 and store it in the folder
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 364--365
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 354--355
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 378.
+Package pdftex.def Info: ./images//logo.png  used on input line 369.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -904,18 +907,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [5]
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 4
-00.
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 3
+88.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/psnfss/ts1ptm.fd
 File: ts1ptm.fd 2001/06/04 font definitions for TS1/ptm.
 )
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 400--401
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 388--389
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 422.
+Package pdftex.def Info: ./images//logo.png  used on input line 410.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -926,34 +929,34 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [6]
-Underfull \hbox (badness 1609) in paragraph at lines 443--443
+Underfull \hbox (badness 1609) in paragraph at lines 423--423
 []\T1/ptm/m/n/12 Store the names in the \T1/ptm/b/n/12 $dir_atac/results/genric
 h/ \T1/ptm/m/n/12 folder in a file named \T1/ptm/b/n/12 B-
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 443--444
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 423--424
 [][][] 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 455--456
+Underfull \hbox (badness 10000) in paragraph at lines 436--437
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 457--458
+Underfull \hbox (badness 10000) in paragraph at lines 438--439
 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 470--471
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 448--449
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 472.
+Package pdftex.def Info: ./images//logo.png  used on input line 458.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -964,18 +967,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [7]
-Underfull \hbox (badness 10000) in paragraph at lines 487--489
-
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 468--469
+[][][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 510--511
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 488--489
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 514.
+Package pdftex.def Info: ./images//logo.png  used on input line 495.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -986,19 +989,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [8]
-<./images//ndf1.png, id=263, 787.94376pt x 435.6275pt>
+<./images//ndf1.png, id=242, 787.94376pt x 435.6275pt>
 File: ./images//ndf1.png Graphic file (type png)
 <use ./images//ndf1.png>
-Package pdftex.def Info: ./images//ndf1.png  used on input line 523.
+Package pdftex.def Info: ./images//ndf1.png  used on input line 501.
 (pdftex.def)             Requested size: 440.84746pt x 243.73038pt.
-<./images//hnf1a.png, id=265, 881.2925pt x 486.81876pt>
+<./images//hnf1a.png, id=244, 881.2925pt x 486.81876pt>
 File: ./images//hnf1a.png Graphic file (type png)
 <use ./images//hnf1a.png>
-Package pdftex.def Info: ./images//hnf1a.png  used on input line 534.
+Package pdftex.def Info: ./images//hnf1a.png  used on input line 512.
 (pdftex.def)             Requested size: 440.84746pt x 243.5202pt.
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 538.
+Package pdftex.def Info: ./images//logo.png  used on input line 516.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 
@@ -1010,15 +1013,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [9 <./images//ndf1.png>]
-<./images//Atlantic_salmon_msi1.png, id=276, 903.375pt x 333.49594pt>
+<./images//Atlantic_salmon_msi1.png, id=255, 903.375pt x 333.49594pt>
 File: ./images//Atlantic_salmon_msi1.png Graphic file (type png)
 <use ./images//Atlantic_salmon_msi1.png>
 Package pdftex.def Info: ./images//Atlantic_salmon_msi1.png  used on input line
- 542.
+ 520.
 (pdftex.def)             Requested size: 440.84746pt x 162.7478pt.
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 556.
+Package pdftex.def Info: ./images//logo.png  used on input line 534.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 
@@ -1030,18 +1033,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [10 <./images//hnf1a.png> <./images//Atlantic_salmon_msi1.png (PNG copy)>]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 563--564
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 541--542
 [][][] 
  []
 
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 617--618
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 592--593
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 635.
+Package pdftex.def Info: ./images//logo.png  used on input line 602.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1052,13 +1055,18 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [11]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 651--652
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 618--619
+[][][] 
+ []
+
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 643--644
 [][][] 
  []
 
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 674.
+Package pdftex.def Info: ./images//logo.png  used on input line 645.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1069,42 +1077,25 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
 [12]
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 689--690
-[][][] 
- []
-
-File: ./images//logo.png Graphic file (type png)
-<use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 711.
-(pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 30.42317pt, for example:
-(fancyhdr)                \setlength{\headheight}{30.42317pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
-
-[13]
-<./images//ataqv_good.png, id=362, 1795.70876pt x 970.62625pt>
+<./images//ataqv_good.png, id=295, 1795.70876pt x 970.62625pt>
 File: ./images//ataqv_good.png Graphic file (type png)
 <use ./images//ataqv_good.png>
-Package pdftex.def Info: ./images//ataqv_good.png  used on input line 713.
+Package pdftex.def Info: ./images//ataqv_good.png  used on input line 657.
 (pdftex.def)             Requested size: 440.84746pt x 238.28685pt.
 
-Overfull \hbox (28.19145pt too wide) in paragraph at lines 718--720
+Overfull \hbox (28.19145pt too wide) in paragraph at lines 662--664
 []\T1/ptm/m/n/12 Now do the same for spleen sam-ple re-sults ($dir_atac/results
 /markv/ataqv_good_html/index.html).
  []
 
-<./images//ataqv_bad.png, id=363, 1799.72375pt x 961.5925pt>
+<./images//ataqv_bad.png, id=296, 1799.72375pt x 961.5925pt>
 File: ./images//ataqv_bad.png Graphic file (type png)
 <use ./images//ataqv_bad.png>
-Package pdftex.def Info: ./images//ataqv_bad.png  used on input line 722.
+Package pdftex.def Info: ./images//ataqv_bad.png  used on input line 666.
 (pdftex.def)             Requested size: 440.84746pt x 235.54086pt.
 File: ./images//logo.png Graphic file (type png)
 <use ./images//logo.png>
-Package pdftex.def Info: ./images//logo.png  used on input line 729.
+Package pdftex.def Info: ./images//logo.png  used on input line 669.
 (pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
@@ -1114,7 +1105,21 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
 
-[14 <./images//ataqv_good.png> <./images//ataqv_bad.png>] (./atac.aux)
+[13 <./images//ataqv_good.png>]
+File: ./images//logo.png Graphic file (type png)
+<use ./images//logo.png>
+Package pdftex.def Info: ./images//logo.png  used on input line 673.
+(pdftex.def)             Requested size: 28.45274pt x 26.07314pt.
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 30.42317pt, for example:
+(fancyhdr)                \setlength{\headheight}{30.42317pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-18.42317pt}.
+
+[14 <./images//ataqv_bad.png>] (./atac.aux)
 
 LaTeX Warning: There were multiply-defined labels.
 
@@ -1122,24 +1127,26 @@ Package rerunfilecheck Info: File `atac.out' has not changed.
 (rerunfilecheck)             Checksum: 7F403EBE17D8516D77904BE42876B38C;2735.
  ) 
 Here is how much of TeX's memory you used:
- 22922 strings out of 478994
- 406566 string characters out of 5858184
- 722435 words of memory out of 5000000
- 39785 multiletter control sequences out of 15000+600000
- 433118 words of font info for 63 fonts, out of 8000000 for 9000
+ 22856 strings out of 478994
+ 405666 string characters out of 5858184
+ 880455 words of memory out of 5000000
+ 39775 multiletter control sequences out of 15000+600000
+ 434034 words of font info for 66 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 87i,16n,88p,385b,1241s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 87i,15n,88p,456b,1269s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/t
-exlive/2021/texmf-dist/fonts/type1/public/bera/fvmb8a.pfb></usr/local/texlive/2
-021/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2021/texm
-f-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2021/texmf-dist/
-fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type
-1/urw/times/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/time
-s/utmri8a.pfb>
-Output written on atac.pdf (14 pages, 1147307 bytes).
+exlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/te
+xlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/tex
+live/2021/texmf-dist/fonts/type1/public/bera/fvmb8a.pfb></usr/local/texlive/202
+1/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb></usr/local/texlive/2021/texmf-
+dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2021/texmf-dist/fo
+nts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/
+urw/times/utmr8a.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/urw/times/
+utmri8a.pfb>
+Output written on atac.pdf (14 pages, 1159011 bytes).
 PDF statistics:
- 439 PDF objects out of 1000 (max. 8388607)
- 401 compressed objects within 5 object streams
- 209 named destinations out of 1000 (max. 500000)
+ 380 PDF objects out of 1000 (max. 8388607)
+ 341 compressed objects within 4 object streams
+ 153 named destinations out of 1000 (max. 500000)
  203 words of extra memory for PDF output out of 10000 (max. 10000000)
 
