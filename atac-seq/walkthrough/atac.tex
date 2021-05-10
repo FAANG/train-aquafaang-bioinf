@@ -9,8 +9,13 @@
 \usepackage{titlesec}
 \usepackage{enumitem}
 \usepackage{adjustbox}
+\usepackage{lastpage}
+\usepackage{fancyvrb}
 
 \graphicspath{ {./images/} }
+
+
+
 
 \usepackage[colorlinks = true,
 linkcolor = blue,
@@ -44,6 +49,7 @@ anchorcolor = blue]{hyperref}
 	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
 	breakatwhitespace=false,
 	backgroundcolor=\color{blue!20},
+%	backgroundcolor=\color{black},
 	showstringspaces=false,
 	showspaces=false,    
 	frameround=ffff,
@@ -65,50 +71,24 @@ anchorcolor = blue]{hyperref}
 	emph=[1]{%  
 		wget, gunzip, cd, docker,  grep, cut, sort, export%
 	},emphstyle=[1]{\color{red}\bfseries},%
-	emph=[3]{%  
+	emph=[2]{%  
 		--mount, --workdir, -e%
-	},emphstyle=[3]{\color{purple}\bfseries},%
-	emph=[4]{%
+	},emphstyle=[2]{\color{purple}\bfseries},%
+	emph=[3]{%
 		Salmo\_salar.ICSASG\_v2.dna.toplevel.fa.gz, Salmo\_salar.ICSASG\_v2.dna.toplevel.fa,  Salmo\_salar.ICSASG\_v2.dna.toplevel.fa.fai,
 		Ssal\_chrm.txt
-	},emphstyle=[4]{\color{blue}\bfseries},%
+	},emphstyle=[3]{\color{blue}\bfseries},%
+	emph=[4]{%  
+		juettemann\/samtools:latest,  juettemann/genrich:0.6, alpine%
+	},emphstyle=[4]{\color{Maroon}\bfseries},%
 	emph=[5]{%  
-		juettemann\/samtools:latest,  juettemann/genrich:1.0%
+		run, inspect, exec, pull, image, build, container, system, stop, kill	 
 	},emphstyle=[5]{\color{brown}\bfseries},%
 	emph=[6]{%  
-		run, inspect, exec
-	},emphstyle=[6]{\color{mypink1}\bfseries},%
-	emph=[7]{%  
-		run, inspect, exec
-	},emphstyle=[7]{\color{red}\bfseries},%
-	emph=[8]{%  
 		\$blast\_c
-	},emphstyle=[8]{\color{TealBlue}\itshape},%
+	},emphstyle=[6]{\color{TealBlue}\itshape},%
 }%
-%\lstdefinelanguage{mylang}{ %
-%	alsoletter=.\_/:,%
-%}%
 
-%\makeatletter
-%\newenvironment{btHighlight}[1][]
-%{\begingroup\tikzset{bt@Highlight@par/.style={#1}}\begin{lrbox}{\@tempboxa}}
-%	{\end{lrbox}\bt@HL@box[bt@Highlight@par]{\@tempboxa}\endgroup}
-%
-%\newcommand\btHL[1][]{%
-%	\begin{btHighlight}[#1]\bgroup\aftergroup\bt@HL@endenv%
-%	}
-%	\def\bt@HL@endenv{%
-%	\end{btHighlight}%   
-%	\egroup
-%}
-%\newcommand{\bt@HL@box}[2][]{%
-%	\tikz[#1]{%
-%		\pgfpathrectangle{\pgfpoint{1pt}{0pt}}{\pgfpoint{\wd #2}{\ht #2}}%
-%		\pgfusepath{use as bounding box}%
-%		\node[anchor=base west, fill=orange!30,outer sep=0pt,inner xsep=1pt, inner ysep=0pt, rounded corners=3pt, minimum height=\ht\strutbox+1pt,#1]{\raisebox{1pt}{\strut}\strut\usebox{#2}};
-%	}%
-%}
-%\makeatother
 
 
 \usepackage{fancyhdr}
@@ -185,7 +165,7 @@ anchorcolor = blue]{hyperref}
 						\hline
 						sam & Sequence Alignment/Map file format &\url{http://www.htslib.org/doc/sam.html} \\
 						\hline
-						sam & Binary Format of Sequence Alignment/Mapping (SAM) & \url{https://genome.ucsc.edu/ENCODE/fileFormats.html#BAM}\\
+						bam & Binary Format of Sequence Alignment/Mapping (SAM) & \url{https://genome.ucsc.edu/ENCODE/fileFormats.html#BAM}\\
 						\hline
 						bigWig & Genome Browser Signal (Wiggle) Files in Indexed Binary Format & \url{https://genome.ucsc.edu/ENCODE/fileFormats.html#bigWig}\\
 						\hline
