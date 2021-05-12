@@ -35,6 +35,7 @@ anchorcolor = blue]{hyperref}
 %No indent
 \setlength{\parindent}{0pt}
 \setenumerate{itemsep=0pt,parsep=0pt}
+\setitemize{itemsep=0pt,parsep=0pt}
 
 
 % https://en.wikibooks.org/wiki/LaTeX/Source_Code_Listings
@@ -46,10 +47,10 @@ anchorcolor = blue]{hyperref}
 	columns=fullflexible,
 	basicstyle=\small\ttfamily,
 	breaklines=true,
-	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
+%	postbreak=\mbox{\textcolor{red}{$\hookrightarrow$}\space},
 	breakatwhitespace=false,
-	backgroundcolor=\color{blue!20},
-%	backgroundcolor=\color{black},
+%	backgroundcolor=\color{blue!20},
+	backgroundcolor=\color{black},
 	showstringspaces=false,
 	showspaces=false,    
 	frameround=ffff,
@@ -67,28 +68,27 @@ anchorcolor = blue]{hyperref}
 
 \definecolor{mypink1}{rgb}{0.858, 0.188, 0.478}
 % Highlight keywords
-\lstset{
-	emph=[1]{%  
-		wget, gunzip, cd, docker,  grep, cut, sort, export%
-	},emphstyle=[1]{\color{red}\bfseries},%
-	emph=[2]{%  
-		--mount, --workdir, -e%
-	},emphstyle=[2]{\color{purple}\bfseries},%
-	emph=[3]{%
-		Salmo\_salar.ICSASG\_v2.dna.toplevel.fa.gz, Salmo\_salar.ICSASG\_v2.dna.toplevel.fa,  Salmo\_salar.ICSASG\_v2.dna.toplevel.fa.fai,
-		Ssal\_chrm.txt
-	},emphstyle=[3]{\color{blue}\bfseries},%
-	emph=[4]{%  
-		juettemann\/samtools:latest,  juettemann/genrich:0.6, alpine%
-	},emphstyle=[4]{\color{Maroon}\bfseries},%
-	emph=[5]{%  
-		run, inspect, exec, pull, image, build, container, system, stop, kill	 
-	},emphstyle=[5]{\color{brown}\bfseries},%
-	emph=[6]{%  
-		\$blast\_c
-	},emphstyle=[6]{\color{TealBlue}\itshape},%
-}%
-
+%\lstset{
+%	emph=[1]{%  
+%		wget, gunzip, cd, docker,  grep, cut, sort, export%
+%	},emphstyle=[1]{\color{red}\bfseries},%
+%	emph=[2]{%  
+%		--mount, --workdir, -e%
+%	},emphstyle=[2]{\color{purple}\bfseries},%
+%	emph=[3]{%
+%		Salmo\_salar.ICSASG\_v2.dna.toplevel.fa.gz, Salmo\_salar.ICSASG\_v2.dna.toplevel.fa,  Salmo\_salar.ICSASG\_v2.dna.toplevel.fa.fai,
+%		Ssal\_chrm.txt
+%	},emphstyle=[3]{\color{blue}\bfseries},%
+%	emph=[4]{%  
+%		juettemann\/samtools:latest,  juettemann/genrich:0.6, alpine, juettemann/samtools:latest%
+%	},emphstyle=[4]{\color{Maroon}\bfseries},%
+%	emph=[5]{%  
+%		run, inspect, exec, pull, image, build, container, system, stop, kill	 
+%	},emphstyle=[5]{\color{brown}\bfseries},%
+%	emph=[6]{%  
+%		\$blast\_c
+%	},emphstyle=[6]{\color{TealBlue}\itshape},%
+%}%
 
 
 \usepackage{fancyhdr}
@@ -122,12 +122,37 @@ anchorcolor = blue]{hyperref}
 	\section{Introduction}
 	The aim of this section  is to investigate open chromatin regions in different tissues.  
 	There are 4 sample replicates from brain (B), 4 from liver (L) and 4 from spleen (SP). 
+	We are starting out with the BAM alignment files, which have been downloaded into the folder \textbf{train-aquafaang-bioinf/data} in the training home directory. 
+	The BAM files are sorted by mapping position. 
+	Duplicates/multi-mapped reads and reads mapping to mitochondrial chromosome or unplaced scaffolds have been removed from all files.
+	For simplicity, we are only processing replicate 1 from the brain samples (B-1). 
+	For the other sample replicates, all files have been made available in the respective folder.
 	
-	We are starting out with the BAM alignment files, which have been downloaded into the folder \textbf{train-aquafaang-bioinf/data} in the training home directory. The bam files are sorted by mapping position. Duplicates/multi-mapped reads and reads mapping to mitochondrial chromosome or unplaced scaffolds have been removed from all files.
-	
-	For simplicity, we are only processing replicate 1 from the brain samples. For the other sample replicates, all files have been made available in the respective folder.
-	
+	If you are stuck or simply want to move on to the next section, each target directory contains a folder  \textbf{solution}, which, quite obviously, contains the expected output:
+
+	\vspace{0.5cm}
+
+	\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
+			\begin{itemize}
+				\item \$HOME/train-aquafaang-bioinf/atac-seq/ref\_genome/solution
+				\item \$HOME/train-aquafaang-bioinf/atac-seq/results/genrich/solution
+				\item \$HOME/train-aquafaang-bioinf/atac-seq/results/mkarv/solution
+				\item \$HOME/train-aquafaang-bioinf/atac-seq/results/ataqv/solution
+				\item \$HOME/train-aquafaang-bioinf/atac-seq/data/solution
+			\end{itemize}
+	}}
+
+	\vspace{0.5cm}
+		
 	All processing is done using Docker with containerised applications. 
+	When testing the total runtime of all commands was around 25 minutes. 
+	This does not include loading files in IGV.
+
+\vspace{0.5cm}
+
+	Lastly, a few steps involve manipulating files using command line utilities, namely \textit{wget, grep} and \textit{cut}. 
+	If you are new to using the terminal and command line, copy the instructions from the solution.
+	
 
 		\paragraph{Container}
 
@@ -214,6 +239,7 @@ anchorcolor = blue]{hyperref}
 						\item Right-click on it and choose \textit{Copy Link Location}
 						\item In the terminal, download the file using \textit{wget}
 						\item Unzip (\textit{gunzip})
+						\item Runtime: Download 70s, Unzip 20s
 					\end{enumerate}
 				}}
 			
@@ -247,9 +273,10 @@ anchorcolor = blue]{hyperref}
 			\paragraph{Task}
 				\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
 						\begin{enumerate}
-							\item Pull the container\textbf{ juettemann/samtools:latest} \\
+							\item Pull the container\textbf{ juettemann/samtools:latest} 
+							\item Using  \textbf{faidx} from the container, index \textit{Salmo\_salar.ICSASG\_v2.dna.toplevel.fa}\\
 							(Documentation: \url{http://www.htslib.org/doc/samtools-faidx.html})
-							\item Using  \textbf{faidx} from the container, index \textit{Salmo\_salar.ICSASG\_v2.dna.toplevel.fa}
+							\item Runtime: 10s
 						\end{enumerate}
 				}}
 		
@@ -273,6 +300,7 @@ anchorcolor = blue]{hyperref}
 						\begin{enumerate}
 							\item Using \textbf{grep} and \textbf{cut}, extract all chromosome names
 							\item Store the names in in the \textbf{\$dir\_atac/ref\_genome} folder in a file named \textbf{Ssal\_chrm.txt}
+							\item Runtime: Instant
 						\end{enumerate}
 				}}
 			
@@ -295,7 +323,7 @@ anchorcolor = blue]{hyperref}
 			\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
 					\begin{enumerate}
 						\item Using \textbf{grep} and \textbf{cut}, extract all chromosome names and their length.
-						\item Store the names in the \textbf{\$dir\_atac/ref\_genome} folder in a file named \textbf{Ssal\_chrm\_sizes.txt}
+						\item Store the names in the \textbf{\$dir\_atac/ref\_genome} folder in a file named \textbf{Ssal\_chrm\_sizes.txt} [instant]
 					\end{enumerate}
 			}}
 			
@@ -330,6 +358,7 @@ anchorcolor = blue]{hyperref}
 							(Documentation \url{http://www.htslib.org/doc/samtools-sort.html})
 							\item Name the output file \textbf{B-1.sortedByRead.bam} and store it in the folder \textbf{\$dir\_atac/results/genrich/} 
 							\item Set number of sorting and compression threads to 8
+							\item Runtime: 4m48s
 						\end{enumerate}
 				}}
 			
@@ -363,6 +392,7 @@ anchorcolor = blue]{hyperref}
 								\item ATAC-seq mode 
 							\end{itemize}
 							\item Redirect the STDERR output to \textbf{\$dir\_atac/logs/genrich\_B-1.log}
+							\item Runtime: 7m19s
 						\end{itemize}
 					\end{enumerate}
 			}}
@@ -399,6 +429,7 @@ anchorcolor = blue]{hyperref}
 						\begin{enumerate}
 							\item Using \textbf{grep} and \textbf{cut}, extract all chromosome names and columns 1-4
 							\item Store the names in the \textbf{\$dir\_atac/results/genrich/} folder in a file named \textbf{B-1.k.fixed.bedGraph}
+							\item Runtime: Instant
 						\end{enumerate}
 					}}
 				
@@ -424,6 +455,7 @@ anchorcolor = blue]{hyperref}
 							\begin{enumerate}
 								\item  Using \textbf{quay.io/biocontainers/ucsc-bedgraphtobigwig:377--h0b8a92\_2}, convert \textbf{B-1.k.fixed.bedGraph} to \textbf{B-1.bw}
 								\item  Save the file in \textbf{\$dir\_atac/results/genrich/}
+								\item Runtime: 1m18s
 							\end{enumerate}
 					}}
 					
@@ -517,6 +549,7 @@ anchorcolor = blue]{hyperref}
 						\begin{enumerate}
 							\item  Using \textbf{ juettemann/samtools} index, convert \textbf{\$dir\_atac/data/B-1.bam} to \textbf{B-1.bw}
 							\item  Name the output \textbf{B-1.bam.bai} and save the file in \textbf{\$dir\_atac/data}
+							\item Runtime: 1m12
 						\end{enumerate}
 				}}
 			
@@ -568,6 +601,7 @@ anchorcolor = blue]{hyperref}
 							\begin{itemize}
 								\item metrics file 	 \$dir\_atac/results/ataqv/B-1.ataqv.json
 							\end{itemize}
+						\item Runtime 6m21
 					\end{enumerate}
 			}}
 			
@@ -594,6 +628,7 @@ anchorcolor = blue]{hyperref}
 							\item results/mkarv/ataqv\_good\_html 
 							\item whitespace separated list of all 8 B \& L *.ataqv.json files, e.g.  \textbf{results/ataqv/B-1.ataqv.json}  
 						\end{itemize}
+						
 						\end{enumerate}
 				}}
 			
@@ -619,6 +654,7 @@ anchorcolor = blue]{hyperref}
 							\item results/mkarv/ataqv\_bad\_html 
 							\item whitespace separated list of all 4 SP *.ataqv.json files, e.g.  \textbf{results/ataqv/SP-1.ataqv.json}  
 						\end{itemize}
+						\item Runtime: 10s
 					\end{enumerate}
 			}}
 			
