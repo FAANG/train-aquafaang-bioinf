@@ -454,7 +454,7 @@ anchorcolor = blue]{hyperref}
 
 					\fcolorbox{black}[HTML]{E9F0E9}{\parbox{\linewidth}{%	
 							\begin{enumerate}
-								\item  Using \textbf{quay.io/biocontainers/ucsc-bedgraphtobigwig:377--h0b8a92\_2}, convert \textbf{B-1.k.fixed.bedGraph} to \textbf{B-1.bw}
+								\item  Using \textbf{quay.io/biocontainers/ucsc-bedgraphtobigwig:377--h0b8a92a\_2}, convert \textbf{B-1.k.fixed.bedGraph} to \textbf{B-1.bw}
 								\item  Save the file in \textbf{\$dir\_atac/results/genrich/}
 								\item Runtime: 1m18s
 							\end{enumerate}
@@ -557,7 +557,7 @@ anchorcolor = blue]{hyperref}
 			\paragraph{Solution}
 				\begin{minipage}{\linewidth}
 					\begin{lstlisting}
-						docker run --mount $mnt_dir_atac juettemann/samtools index /mnt/data/B-1.bam /mntdata/B-1.bam.bai
+						docker run --mount $mnt_dir_atac juettemann/samtools index /mnt/data/B-1.bam /mnt/data/B-1.bam.bai
 					\end{lstlisting}
 				\end{minipage}
 		
@@ -676,7 +676,7 @@ anchorcolor = blue]{hyperref}
 				\label{fig:ataqv_good}
 			\end{figure}
 			
-			Now do the same for spleen sample results (\$dir\_atac/results/markv/ataqv\_good\_html/index.html). 
+			Now do the same for spleen sample results (\$dir\_atac/results/markv/ataqv\_bad\_html/index.html). 
 			What differences do you see?
 			
 			\begin{figure}[H]
