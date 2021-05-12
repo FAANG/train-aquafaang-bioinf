@@ -1,0 +1,151 @@
+---
+title: "AQUA-FAANG DiffBind Tutorial"
+author: "Malcolm Perry"
+output: html_notebook
+---
+  
+First let's check we have the files we need:
+  
+```{r}
+dir() # view tutorial files
+dir("data/")
+```
+
+Then load some packages:
+  
+```{r packages, message=FALSE}
+library(DiffBind)
+library(tidyverse)
+```
+
+The first step in any diffbind analysis is to set up the sample sheet, containing 
+
+```{r sample_sheet}
+sample_sheet = "sample_sheet.csv"
+sample_df = read_csv(sample_sheet)
+```
+
+Q1: How many bam files do we have? How many replicates? How many peak files? Check these files are all present.
+
+HINT: The sample sheet is just a simple data frame.
+
+```{r Q1}
+```
+
+Then we create a DBA object from the sample sheet. `minOverlap=1` specifies that we don't require peaks to be present in 2 or more samples to be counted, which makes sense here because our peaks are calculated using replicates already.
+  
+```{r analyse}
+zebrafish_dba = dba(sampleSheet = sample_sheet, minOverlap=1)
+```
+
+Q2: How many peaks are in each BED file?
+
+HINT: These are stored a list in `dba$peaks`.
+
+```{r Q2}
+```
+
+In order to count the reads in each peak, we first need to calculate a merged peakset containing all of the peaks from both oocyte and sperm. DiffBind does this automatically when you call the count function, but we'll explore the results of this later. Once we have a merged peak set, we can count the reads in each peak in each file.
+
+```{r count}
+zebrafish_dba = dba.count(zebrafish_dba, bParallel = FALSE)
+```
+
+Q3: How many peaks are in the merged peak set?
+
+HINT The merged and re-centred peaks have replaced the original peaks in `dba$peaks`. Counts are stored in the `RPKM` column.
+
+```{r Q3}
+```
+
+We can visualise the correlation between samples using the DBA `plot()` method.
+
+```{r correlation}
+plot(zebrafish_dba)
+```
+
+Before performing the analysis, we need to tell DiffBind how to group the sample. This is a called a 'contrast', and relates directly to the model of the data DESeq2 will construct. In our case, this is very obvious since we only have 2 tissues and 4 samples, but there are more detailed examples in the vignette.
+
+NB We set `minMembers = 2` because by default it will not allow groups with fewer than 3 samples.
+
+```{r count_matrix}
+zebrafish_dba = dba.contrast(zebrafish_dba, minMembers = 2)
+```
+
+Now are finally ready to perform the analysis step. Notet that if you are running this yourself, you can call `dba.analyze()` directly on the initial DBA object and the previous steps will be performed automatically.
+
+```{r contrast}
+zebrafish_dba = dba.analyze(zebrafish_dba, bParallel = FALSE)
+```
+
+The normalisation has already been performed in `dba.analyze`, here is some fiddly code to produce a data frame of normalisation factors:
+
+```{r norm}
+zebrafish_dba = dba.analyze(zebrafish_dba)
+
+norm_df = with(list(norm=zebrafish_dba$norm$DESeq2),
+               bind_cols(
+                 SampleID=zebrafish_dba$samples$SampleID,
+                 FullLibSize=norm$lib.sizes,
+                 NormFacs=norm$norm.facs,
+                 NormLibSize=round(norm$lib.sizes/norm$norm.facs)))
+
+norm_df
+```
+
+Now we can retrieve the differentially bound peaks with `dba.report()`:
+
+NB The function returns a `GRanges` object but here we've converted it into a data frame for downstream analyses.
+
+```{r diff_peaks}
+significant_peaks = dba.report(zebrafish_dba)
+```
+
+Q4: How many peaks have higher acetylation in Oocyte vs. Sperm? Normalised binding scores are stored in the `Conc_sperm` and `Conc_oocyte` columns, and `Fold` represents the change from Oocyte to Sperm.
+
+HINT: you can convert `significant_peaks` into a data frame using `as.data.frame()`.
+
+```{r Q4}
+oocyte_diff = significant_peaks[significant_peaks$Conc_oocyte > significant_peaks$Conc_sperm]
+
+message(paste("Oocyte-specific peaks:", length(oocyte_diff)))
+```
+
+Q5: Produce a boxplot of RPKM values for differentially bound Oocyte peaks in each sample.
+
+HINT: the `names()` for the differentially bound peaks correspond to the row number of the peak in the merged peakset. If you're not comfortable with looping in R, just do it for each Rep 1.
+
+```{r Q5}
+oocyte_diff_counts = map(zebrafish_dba$peaks, function(df) df[names(oocyte_diff),])
+
+names(oocyte_diff_counts) = zebrafish_dba$samples$SampleID
+
+oocyte_diff_df = bind_rows(oocyte_diff_counts, .id="SampleID") %>%
+  separate(SampleID, into = c("Tissue", "Target", "Replicate"), remove=F)
+
+ggplot(oocyte_diff_df, aes(x=SampleID, y=RPKM)) +
+  stat_boxplot(geom="errorbar", width=0.3) +
+  geom_boxplot(aes(fill=Tissue), outlier.shape=NA, width=0.3) +
+  ylim(0, 12) + ylab("FPKM") + theme_bw() +
+  theme(axis.text.x = element_text(angle = 70, vjust = 1, hjust=1)) +
+  ggtitle("Oocyte H3K27 Differentially Bound Peaks")
+```
+
+Q6: Assign Oocyte differentially bound peaks to their nearest gene. Zv9 protein coding gene annotation is loaded for you.
+
+HINT: `distanceToNearest()` in the `GenomicRanges` packages is your friend.
+
+```{r Q6}
+ensembl_pc = rtracklayer::import("data/Zv9_ensembl_pc.bed")
+
+hits = distanceToNearest(oocyte_diff, ensembl_pc)
+
+oocyte_diff$nearest_ens_gene = NA_character_
+
+oocyte_diff$nearest_ens_gene[queryHits(hits)] = ensembl_pc$name[subjectHits(hits)]
+
+oocyte_diff
+
+```
+
+
